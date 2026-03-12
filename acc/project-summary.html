@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Custom Coach — Project Summary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:  #0d0d0d;
+    --bg2:    #141414;
+    --bg3:    #1a1a1a;
+    --border: #2a2a2a;
+    --gold:   #D4AF37;
+    --white:  #F5F0E8;
+    --gray:   #888;
+    --gray2:  #555;
+    --serif:  'Cormorant Garamond', Georgia, serif;
+    --mono:   'DM Mono', monospace;
+    --sans:   'DM Sans', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-brand {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+  .header-brand strong { color: var(--white); display: block; font-size: 12px; margin-bottom: 2px; }
+  .header-date {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gray2);
+    letter-spacing: 1px;
+  }
+
+  /* HERO */
+  .hero {
+    padding: 64px 48px 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: 56px;
+    font-weight: 600;
+    line-height: 1.0;
+    margin-bottom: 16px;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub {
+    color: var(--gray);
+    font-size: 15px;
+    max-width: 600px;
+    font-weight: 300;
+  }
+
+  /* STAT ROW */
+  .stats {
+    display: flex;
+    gap: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin: 0;
+  }
+  .stat {
+    flex: 1;
+    padding: 28px 48px;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 40px;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray2);
+    margin-top: 6px;
+  }
+
+  /* CONTENT */
+  .content {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 56px 48px;
+  }
+
+  /* SECTION */
+  .section { margin-bottom: 56px; }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .section-title {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* PHASE BLOCK */
+  .phase {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+  }
+  .phase-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    min-width: 32px;
+  }
+  .phase-title {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    flex: 1;
+  }
+  .phase-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border: 1px solid rgba(111,207,151,0.3);
+    color: #6fcf97;
+    background: rgba(111,207,151,0.06);
+  }
+  .phase-body {
+    padding: 20px 24px 20px 72px;
+  }
+  .phase-body ul {
+    list-style: none;
+  }
+  .phase-body ul li {
+    padding: 5px 0;
+    color: #ccc;
+    font-size: 13px;
+    line-height: 1.5;
+    display: flex;
+    gap: 10px;
+  }
+  .phase-body ul li::before {
+    content: '—';
+    color: var(--gold);
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+
+  /* DELIVERABLE CARDS */
+  .deliverables {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .deliverable {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 20px 22px;
+  }
+  .deliverable-icon {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .deliverable-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .deliverable-desc {
+    font-size: 12px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+  .deliverable-url {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--border);
+  }
+  .deliverable-url a {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gold);
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    word-break: break-all;
+  }
+  .deliverable-url a:hover { text-decoration: underline; }
+
+  /* INFRASTRUCTURE TABLE */
+  .infra-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .infra-table th {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray2);
+    text-align: left;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .infra-table td {
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #ccc;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .infra-table tr:last-child td { border-bottom: none; }
+  .infra-table td:first-child {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--gold);
+    white-space: nowrap;
+    width: 160px;
+  }
+  .infra-table a { color: var(--gold); text-decoration: none; }
+  .infra-table a:hover { text-decoration: underline; }
+
+  /* COMPETITOR TABLE */
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .comp-table th {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray2);
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  .comp-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    color: #ccc;
+    vertical-align: top;
+  }
+  .comp-table tr:last-child td { border-bottom: none; }
+  .score {
+    font-family: var(--mono);
+    font-weight: 500;
+    color: var(--white);
+  }
+  .score.high { color: var(--gold); }
+
+  /* CALLOUT */
+  .callout {
+    background: rgba(212,175,55,0.06);
+    border: 1px solid rgba(212,175,55,0.2);
+    padding: 20px 24px;
+    margin-top: 24px;
+  }
+  .callout-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 10px;
+  }
+  .callout p { font-size: 13px; color: #ccc; line-height: 1.6; }
+
+  /* NEXT STEPS */
+  .next-steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .next-step {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 18px 20px;
+  }
+  .step-num {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--gray2);
+    margin-bottom: 8px;
+  }
+  .step-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+  .step-desc {
+    font-size: 12px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-left {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gray2);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .footer-right {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gray2);
+  }
+
+  @media (max-width: 768px) {
+    header, .hero, .content, footer { padding-left: 20px; padding-right: 20px; }
+    .stats { flex-wrap: wrap; }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); padding: 20px; }
+    .deliverables, .next-steps { grid-template-columns: 1fr; }
+    .phase-body { padding-left: 24px; }
+    .hero h1 { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-brand">
+    <strong>Speed of Now Productions</strong>
+    Project Documentation
+  </div>
+  <div class="header-date" id="doc-date"></div>
+</header>
+
+<div class="hero">
+  <div class="eyebrow">Client · A Custom Coach · Phase 1 Complete</div>
+  <h1>Project<br><em>Summary</em></h1>
+  <p class="hero-sub">A full account of research, deliverables, and infrastructure completed during Phase 1 of the A Custom Coach website rebuild engagement.</p>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">10</div>
+    <div class="stat-label">Competitors Profiled</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Deliverables Built</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">7</div>
+    <div class="stat-label">Live Screenshots Captured</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">2</div>
+    <div class="stat-label">Live URLs Deployed</div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ── OVERVIEW ── -->
+  <div class="section">
+    <div class="section-label">Overview</div>
+    <div class="section-title">What This Engagement Covers</div>
+    <p style="color:#ccc; margin-bottom:16px;">A Custom Coach (acustomcoach.com) is a Denver/Boulder luxury ground transportation company established in 1988. The owner, John Hafer, engaged Speed of Now Productions to rebuild the company's website — a static 2013 Dreamweaver-era site currently scoring 2.5/10 against competitors — into a modern, premium digital presence.</p>
+    <p style="color:#ccc;">Phase 1 focused entirely on research, competitive positioning, and infrastructure setup before any design or development work begins.</p>
+  </div>
+
+  <!-- ── PHASES ── -->
+  <div class="section">
+    <div class="section-label">Work Completed</div>
+    <div class="section-title">Phase 1 Breakdown</div>
+
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">01</div>
+        <div class="phase-title">Client & Business Research</div>
+        <div class="phase-tag">Complete</div>
+      </div>
+      <div class="phase-body">
+        <ul>
+          <li>Documented full company history: Est. 1988, 37 years in operation</li>
+          <li>Catalogued full fleet: Lincoln sedans, Ford Expeditions, stretch limousines, passenger vans, executive Sprinter vans, affiliate motor coaches</li>
+          <li>Identified service verticals: DIA airport transfers, corporate/VIP, mountain destinations, weddings, special events, meet &amp; greet</li>
+          <li>Documented credentials: BBB A+, DIA Ground Transportation Board member since 1995 (held Chairman and VP roles), NLA member, Colorado Limousine Association VP 20+ years</li>
+          <li>Noted acquisitions: Boulder Transportation, Centennial Sedans, Diamond Limo</li>
+          <li>Confirmed live phone answer policy — no auto-attendant, rare differentiator in the market</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">02</div>
+        <div class="phase-title">Competitive Market Analysis — 10 Competitors</div>
+        <div class="phase-tag">Complete</div>
+      </div>
+      <div class="phase-body">
+        <ul>
+          <li>Identified, researched, and scored 10 direct competitors in the Denver/Boulder luxury ground transportation market</li>
+          <li>Captured live homepage screenshots of top 7 competitors using automated headless browser rendering</li>
+          <li>Analyzed each competitor's fleet presentation, service pages, booking systems, design quality, trust signals, and SEO positioning</li>
+          <li>Identified 12 universal design and UX patterns across the competitive set that customers expect</li>
+          <li>Identified 5 market-wide gaps that no competitor is currently filling — ACC opportunity areas</li>
+          <li>Developed 10 specific feature recommendations for the ACC rebuild based on competitive gaps</li>
+          <li>Documented ACC's 6 unmatched differentiators — credentials no competitor can replicate</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">03</div>
+        <div class="phase-title">Deliverable Production</div>
+        <div class="phase-tag">Complete</div>
+      </div>
+      <div class="phase-body">
+        <ul>
+          <li>Built fully interactive competitive analysis HTML document — dark luxury aesthetic matching ACC brand direction</li>
+          <li>Embedded all 7 competitor homepage screenshots as base64 (fully self-contained, no external dependencies)</li>
+          <li>Built old site reference document — recreation of the 2013 Dreamweaver-era ACC site for baseline documentation</li>
+          <li>Reviewed all language for client-facing appropriateness — removed all internal-only framing</li>
+          <li>Increased section label typography for readability across all documents</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-header">
+        <div class="phase-num">04</div>
+        <div class="phase-title">Infrastructure Setup — Client Documentation Portal</div>
+        <div class="phase-tag">Complete</div>
+      </div>
+      <div class="phase-body">
+        <ul>
+          <li>Designed and built a master client documentation portal (index.html) — Speed of Now internal workspace</li>
+          <li>Established scalable folder structure: one folder per client, one file per deliverable</li>
+          <li>Initialized GitHub repository: github.com/BabaYaga2772/son-client-docs</li>
+          <li>Deployed to Vercel with automatic CI/CD — every git push auto-updates all live URLs</li>
+          <li>Connected GitHub integration to Vercel project for perpetual auto-deployment</li>
+          <li>Documented the full workflow in README.md — adding new clients and documents takes under 5 minutes</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── DELIVERABLES ── -->
+  <div class="section">
+    <div class="section-label">Deliverables</div>
+    <div class="section-title">Documents Produced</div>
+    <div class="deliverables">
+      <div class="deliverable">
+        <div class="deliverable-icon">📊</div>
+        <div class="deliverable-name">Competitive Analysis</div>
+        <div class="deliverable-desc">Full interactive report covering 10 competitors. Includes live screenshots, scoring matrix, design pattern analysis, ACC differentiators, market gaps, and 10 feature recommendations for the rebuild.</div>
+        <div class="deliverable-url"><a href="competitive-analysis.html" target="_blank">↗ competitive-analysis.html</a></div>
+      </div>
+      <div class="deliverable">
+        <div class="deliverable-icon">🗂</div>
+        <div class="deliverable-name">Old Site Reference</div>
+        <div class="deliverable-desc">Documented recreation of the original 2013 ACC website. Used as a baseline reference — captures the existing content, structure, contact details, and service copy before the rebuild.</div>
+        <div class="deliverable-url"><a href="old-site-reference.html" target="_blank">↗ old-site-reference.html</a></div>
+      </div>
+      <div class="deliverable">
+        <div class="deliverable-icon">🌐</div>
+        <div class="deliverable-name">Client Documentation Portal</div>
+        <div class="deliverable-desc">Master internal workspace listing all client projects and documents. Expandable per client. Bookmarkable from any device. Updates automatically on every push.</div>
+        <div class="deliverable-url"><a href="https://son-client-docs.vercel.app" target="_blank">↗ son-client-docs.vercel.app</a></div>
+      </div>
+      <div class="deliverable">
+        <div class="deliverable-icon">📋</div>
+        <div class="deliverable-name">Project Summary (This Document)</div>
+        <div class="deliverable-desc">Full account of all Phase 1 work, deliverables, infrastructure, competitive findings, and recommended next steps. Suitable for PM handoff or client review.</div>
+        <div class="deliverable-url"><a href="project-summary.html" target="_blank">↗ project-summary.html</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── INFRASTRUCTURE ── -->
+  <div class="section">
+    <div class="section-label">Infrastructure</div>
+    <div class="section-title">Live URLs &amp; Repository</div>
+    <div style="background:var(--bg2); border:1px solid var(--border); overflow:hidden;">
+      <table class="infra-table">
+        <thead>
+          <tr>
+            <th>Resource</th>
+            <th>URL</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Client Portal</td>
+            <td><a href="https://son-client-docs.vercel.app" target="_blank">son-client-docs.vercel.app</a></td>
+            <td>Master index — bookmark this on all devices</td>
+          </tr>
+          <tr>
+            <td>Competitive Analysis</td>
+            <td><a href="https://son-client-docs.vercel.app/acc/competitive-analysis.html" target="_blank">son-client-docs.vercel.app/acc/competitive-analysis.html</a></td>
+            <td>Shareable directly with client or team</td>
+          </tr>
+          <tr>
+            <td>Old Site Reference</td>
+            <td><a href="https://son-client-docs.vercel.app/acc/old-site-reference.html" target="_blank">son-client-docs.vercel.app/acc/old-site-reference.html</a></td>
+            <td>Internal reference only</td>
+          </tr>
+          <tr>
+            <td>GitHub Repository</td>
+            <td><a href="https://github.com/BabaYaga2772/son-client-docs" target="_blank">github.com/BabaYaga2772/son-client-docs</a></td>
+            <td>Source of truth — push here to update all URLs</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      <div class="callout-label">How Updates Work</div>
+      <p>All documents are version-controlled in GitHub. Any new deliverable added to the repo and pushed to <code style="color:var(--gold); font-family:var(--mono);">main</code> automatically deploys to Vercel within 30 seconds. No manual upload process. No FTP. No broken links.</p>
+    </div>
+  </div>
+
+  <!-- ── COMPETITOR MATRIX ── -->
+  <div class="section">
+    <div class="section-label">Research Summary</div>
+    <div class="section-title">Competitive Scoring Matrix</div>
+    <div style="background:var(--bg2); border:1px solid var(--border); overflow:hidden;">
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Company</th>
+            <th>Score</th>
+            <th>Primary Strengths</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="font-family:var(--mono);font-size:11px;color:var(--gray2);">01</td>
+            <td style="color:var(--white); font-weight:500;">Crown Limousine</td>
+            <td><span class="score high">8.5</span></td>
+            <td>Vehicle-specific fleet pages, 400+ reviews, dedicated service verticals, strong CTAs</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);font-size:11px;color:var(--gray2);">02</td>
+            <td style="color:var(--white); font-weight:500;">Denver Executive Limo</td>
+            <td><span class="score high">7.5</span></td>
+            <td>Proprietary chauffeur certification ("ExecuStar"), capacity icons on fleet cards, client portal</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);font-size:11px;color:var(--gray2);">03</td>
+            <td style="color:var(--white); font-weight:500;">Centennial Worldwide</td>
+            <td><span class="score">7.0</span></td>
+            <td>Named vehicle models (Mercedes S580, Cadillac Escalade), government + financial roadshow pages</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);font-size:11px;color:var(--gray2);">04</td>
+            <td style="color:var(--white); font-weight:500;">Hermes Worldwide</td>
+            <td><span class="score">7.0</span></td>
+            <td>25+ service types, 7 Colorado airports covered, WhatsApp contact, DEI procurement angle</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);font-size:11px;color:var(--gray2);">05</td>
+            <td style="color:var(--white); font-weight:500;">American Eagle Limousine</td>
+            <td><span class="score">6.5</span></td>
+            <td>Recently redesigned, clean fleet photography, dual-CTA header, FBO/private aviation targeting</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);font-size:11px;color:var(--gray2);">06</td>
+            <td style="color:var(--white); font-weight:500;">007 Airport Limo Denver</td>
+            <td><span class="score">5.0</span></td>
+            <td>Est. 1996, BBB A+, only competitor showing rate table on homepage</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);font-size:11px;color:var(--gray2);">07</td>
+            <td style="color:var(--white); font-weight:500;">Prestige Worldwide</td>
+            <td><span class="score">6.0</span></td>
+            <td>PAX certification, LimoAnywhere app, mobile CC auth form</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);font-size:11px;color:var(--gray2);">08</td>
+            <td>Pearl Limousine</td>
+            <td><span class="score">4.5</span></td>
+            <td>Basic online presence</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);font-size:11px;color:var(--gray2);">09</td>
+            <td>Anthony's Limo</td>
+            <td><span class="score">4.0</span></td>
+            <td>Established local presence</td>
+          </tr>
+          <tr>
+            <td style="font-family:var(--mono);font-size:11px;color:var(--gray2);">10</td>
+            <td>Denver Airport Limo Co.</td>
+            <td><span class="score">4.0</span></td>
+            <td>25+ years, airport-focused</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="color:var(--gray2); font-family:var(--mono); font-size:10px; margin-top:10px; letter-spacing:1px;">Current ACC site score: 2.5 / 10 — full detail in the Competitive Analysis document.</p>
+  </div>
+
+  <!-- ── NEXT STEPS ── -->
+  <div class="section">
+    <div class="section-label">Roadmap</div>
+    <div class="section-title">Recommended Next Steps — Phase 2</div>
+    <div class="next-steps">
+      <div class="next-step">
+        <div class="step-num">STEP 01</div>
+        <div class="step-title">Client Presentation</div>
+        <div class="step-desc">Present competitive analysis to John. Walk through the scoring gap, ACC's unmatched credentials, and the 10-feature opportunity list. Confirm project scope and timeline.</div>
+      </div>
+      <div class="next-step">
+        <div class="step-num">STEP 02</div>
+        <div class="step-title">Content Audit</div>
+        <div class="step-desc">Collect all existing assets from the client: photos, fleet specs, pricing, bios, any marketing materials. Identify what needs to be shot fresh vs. repurposed.</div>
+      </div>
+      <div class="next-step">
+        <div class="step-num">STEP 03</div>
+        <div class="step-title">Sitemap &amp; Information Architecture</div>
+        <div class="step-desc">Define the 6-page structure (Home, About, Services, Fleet, Reservations, Contact) plus any additional service landing pages identified in research.</div>
+      </div>
+      <div class="next-step">
+        <div class="step-num">STEP 04</div>
+        <div class="step-title">Design System</div>
+        <div class="step-desc">Establish the ACC design system: near-black background, warm gold accents, serif headlines, editorial photography style. Build component library.</div>
+      </div>
+      <div class="next-step">
+        <div class="step-num">STEP 05</div>
+        <div class="step-title">Wireframes</div>
+        <div class="step-desc">Produce wireframes for all 6 pages incorporating the 10 feature recommendations. Client review and approval before development begins.</div>
+      </div>
+      <div class="next-step">
+        <div class="step-num">STEP 06</div>
+        <div class="step-title">Development — Next.js Build</div>
+        <div class="step-desc">Full development in Next.js. Mobile-first. SEO-optimized. Online booking or quote form integration. Deployment to production domain.</div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /content -->
+
+<footer>
+  <div class="footer-left">Speed of Now Productions · A Custom Coach · Phase 1</div>
+  <div class="footer-right" id="footer-date"></div>
+</footer>
+
+<script>
+  const d = new Date();
+  const s = d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  document.getElementById('doc-date').textContent = s;
+  document.getElementById('footer-date').textContent = 'Produced ' + s;
+</script>
+</body>
+</html>
