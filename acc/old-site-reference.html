@@ -1,0 +1,612 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>A Custom Coach | Professional Limousine &amp; Transportation Services</title>
+<style type="text/css">
+/* ===== CIRCA 2013 DREAMWEAVER STYLESHEET ===== */
+* { margin: 0; padding: 0; }
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #333333;
+  background-color: #eeeeee;
+}
+
+/* OUTER WRAPPER */
+#wrapper {
+  width: 780px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-left: 1px solid #cccccc;
+  border-right: 1px solid #cccccc;
+}
+
+/* HEADER */
+#header {
+  width: 780px;
+  height: 110px;
+  background-color: #1a1a1a;
+  background: linear-gradient(180deg, #2a2a2a 0%, #111111 100%);
+  position: relative;
+  overflow: hidden;
+}
+#header-logo {
+  position: absolute;
+  left: 20px;
+  top: 15px;
+}
+#header-logo .company-name {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 28px;
+  font-weight: bold;
+  color: #c8a44a;
+  letter-spacing: 1px;
+  line-height: 1.1;
+}
+#header-logo .tagline {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  color: #aaaaaa;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 4px;
+}
+#header-contact {
+  position: absolute;
+  right: 20px;
+  top: 22px;
+  text-align: right;
+}
+#header-contact .phone {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 22px;
+  color: #c8a44a;
+  font-weight: bold;
+}
+#header-contact .toll-free {
+  font-size: 11px;
+  color: #999999;
+  margin-top: 3px;
+}
+#header-contact .toll-free-num {
+  font-size: 13px;
+  color: #bbbbbb;
+}
+
+/* NAV */
+#nav {
+  width: 780px;
+  height: 34px;
+  background: #2d2d2d;
+  border-top: 2px solid #c8a44a;
+  border-bottom: 1px solid #444444;
+}
+#nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
+#nav ul li {
+  display: inline;
+  float: left;
+}
+#nav ul li a {
+  display: block;
+  float: left;
+  padding: 8px 18px;
+  color: #cccccc;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-right: 1px solid #444444;
+}
+#nav ul li a:hover {
+  background: #c8a44a;
+  color: #000000;
+}
+#nav ul li.active a {
+  background: #c8a44a;
+  color: #000000;
+}
+
+/* MAIN LAYOUT */
+#main {
+  width: 780px;
+  overflow: hidden;
+}
+#content {
+  float: left;
+  width: 530px;
+  padding: 20px 20px 20px 20px;
+}
+#sidebar {
+  float: right;
+  width: 190px;
+  padding: 20px 15px;
+  background: #f5f5f5;
+  border-left: 1px solid #dddddd;
+  min-height: 500px;
+}
+
+/* CONTENT */
+#content h1 {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 22px;
+  color: #1a1a1a;
+  border-bottom: 2px solid #c8a44a;
+  padding-bottom: 6px;
+  margin-bottom: 14px;
+}
+#content h2 {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 17px;
+  color: #1a1a1a;
+  margin: 18px 0 8px 0;
+}
+#content p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #444444;
+  margin-bottom: 12px;
+}
+#content ul {
+  margin: 0 0 14px 20px;
+}
+#content ul li {
+  font-size: 13px;
+  line-height: 1.8;
+  color: #444444;
+}
+
+/* HERO IMAGE PLACEHOLDER */
+#hero-img {
+  width: 530px;
+  height: 180px;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #111111 100%);
+  margin: 0 0 16px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #444;
+  position: relative;
+  overflow: hidden;
+}
+#hero-img::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 20px,
+    rgba(255,255,255,0.02) 20px,
+    rgba(255,255,255,0.02) 21px
+  );
+}
+#hero-img .hero-text {
+  text-align: center;
+  z-index: 1;
+}
+#hero-img .hero-text p {
+  font-family: "Times New Roman", serif;
+  font-size: 15px;
+  color: #c8a44a;
+  margin: 0;
+  letter-spacing: 2px;
+}
+#hero-img .hero-text small {
+  font-size: 10px;
+  color: #666;
+  display: block;
+  margin-top: 6px;
+  font-style: italic;
+}
+
+/* SIDEBAR */
+#sidebar h3 {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 14px;
+  color: #ffffff;
+  background: #2d2d2d;
+  padding: 6px 10px;
+  margin: 0 -15px 10px -15px;
+  border-bottom: 2px solid #c8a44a;
+}
+#sidebar p {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #555555;
+  margin-bottom: 10px;
+}
+#sidebar .contact-box {
+  background: #ffffff;
+  border: 1px solid #cccccc;
+  padding: 10px;
+  margin-bottom: 14px;
+}
+#sidebar .contact-box .phone {
+  font-size: 16px;
+  font-weight: bold;
+  color: #c8a44a;
+  font-family: "Times New Roman", serif;
+}
+#sidebar .contact-box p {
+  font-size: 11px;
+  color: #777777;
+  margin: 4px 0 0 0;
+}
+#sidebar .book-btn {
+  display: block;
+  background: #c8a44a;
+  color: #000000;
+  text-align: center;
+  padding: 9px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 14px;
+  border: 1px solid #a08030;
+}
+#sidebar .book-btn:hover {
+  background: #b8942a;
+}
+#sidebar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+#sidebar ul li {
+  border-bottom: 1px dotted #cccccc;
+  padding: 5px 0;
+}
+#sidebar ul li a {
+  font-size: 12px;
+  color: #2a5a8a;
+  text-decoration: none;
+}
+#sidebar ul li a:hover { text-decoration: underline; }
+#sidebar .affil {
+  margin-top: 14px;
+}
+#sidebar .affil img-placeholder {
+  display: block;
+  width: 100%;
+  height: 40px;
+  background: #e8e8e8;
+  border: 1px solid #ccc;
+  margin-bottom: 6px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 10px;
+  color: #999;
+}
+.badge-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.badge {
+  background: #f0f0f0;
+  border: 1px solid #cccccc;
+  padding: 4px 8px;
+  font-size: 10px;
+  color: #555555;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* TABLE */
+table.fleet-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 10px 0 16px 0;
+  font-size: 12px;
+}
+table.fleet-table th {
+  background: #2d2d2d;
+  color: #c8a44a;
+  padding: 6px 10px;
+  text-align: left;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+table.fleet-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid #eeeeee;
+  color: #444444;
+}
+table.fleet-table tr:nth-child(even) td {
+  background: #f9f9f9;
+}
+
+/* FOOTER */
+#footer {
+  clear: both;
+  background: #1a1a1a;
+  border-top: 2px solid #c8a44a;
+  padding: 16px 20px;
+  text-align: center;
+  color: #888888;
+  font-size: 11px;
+}
+#footer a { color: #c8a44a; text-decoration: none; }
+#footer a:hover { text-decoration: underline; }
+#footer .footer-links { margin-bottom: 8px; }
+#footer .footer-links a { margin: 0 8px; }
+
+/* CLEARFIX */
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+/* NOTICE BANNER */
+.notice-bar {
+  background: #f5f0e0;
+  border-bottom: 1px solid #d4b870;
+  padding: 7px 20px;
+  font-size: 11px;
+  color: #7a6020;
+  text-align: center;
+}
+
+/* FORM */
+.contact-form table { width: 100%; }
+.contact-form td { padding: 4px 6px; font-size: 12px; color: #555; vertical-align: top; }
+.contact-form input[type="text"],
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid #cccccc;
+  padding: 4px 6px;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+  background: #fafafa;
+}
+.contact-form textarea { height: 80px; resize: vertical; }
+.contact-form input[type="submit"] {
+  background: #c8a44a;
+  border: 1px solid #a08030;
+  color: #000;
+  padding: 6px 18px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+}
+</style>
+</head>
+<body>
+
+<div id="wrapper">
+
+  <!-- HEADER -->
+  <div id="header">
+    <div id="header-logo">
+      <div class="company-name">A Custom Coach</div>
+      <div class="company-name" style="font-size:18px; color:#aaaaaa; font-weight:normal;">Boulder Transportation</div>
+      <div class="tagline">Professional Limousine &amp; Transportation Services</div>
+    </div>
+    <div id="header-contact">
+      <div class="phone">(303) 759-1376</div>
+      <div class="toll-free">Toll Free: <span class="toll-free-num">1-800-671-5466</span></div>
+      <div class="toll-free" style="margin-top:6px; color:#c8a44a; font-size:11px;">We answer every call — no auto-attendant</div>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <div id="nav">
+    <ul class="clearfix">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">Services</a></li>
+      <li><a href="#">Fleet</a></li>
+      <li><a href="#">Reservations</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+  </div>
+
+  <!-- NOTICE -->
+  <div class="notice-bar">
+    Please fill out the form below to inquire about transportation services — allow us up to 48 hours to respond. For immediate assistance, please call our office.
+  </div>
+
+  <!-- MAIN -->
+  <div id="main" class="clearfix">
+
+    <!-- CONTENT -->
+    <div id="content">
+
+      <div id="hero-img">
+        <div class="hero-text">
+          <p>DENVER'S PREMIER LIMOUSINE SERVICE</p>
+          <small>[Vehicle image — Lincoln Town Car / stretch limousine]</small>
+        </div>
+      </div>
+
+      <h1>Professional Limousine &amp; Transportation Services</h1>
+
+      <p>
+        When it comes to you or your clients' transportation needs in the state of Colorado, choose <strong>A Custom Coach / Boulder Transportation</strong> to be assured that only the most professional service will be given. We pride ourselves on our quality and diversity of vehicles, expedient dispatch response times, and above all chauffeur professionalism.
+      </p>
+      <p>
+        We can accommodate all of your transportation needs, from a luxury sedan to a stretch limousine or mini-coach bus, we can provide a wide array of services.
+      </p>
+      <p>
+        <strong>Established in 1988</strong>, A Custom Coach/Boulder Transportation has become a leading force in the limousine industry in the state of Colorado. With our extensive fleet and excellent staff we are able to accommodate any transportation needs both locally, and through affiliates, worldwide. Our vision is to present a solution to any potential customer, no matter what the circumstances.
+      </p>
+
+      <h2>Our Services Include:</h2>
+      <ul>
+        <li>Airport Transfers — Denver International Airport (DIA) and all Colorado airports</li>
+        <li>Meet &amp; Greet Services — we assist your clients with luggage and escort them to their vehicle</li>
+        <li>Mountain Attractions — Rocky Mountains and surrounding areas</li>
+        <li>Special Events — Meetings, Charters, Weddings, Concerts, Dinners, Birthdays, Proms</li>
+        <li>Corporate &amp; Business Travel</li>
+        <li>As Directed / Hourly Service</li>
+      </ul>
+
+      <h2>Our Fleet</h2>
+      <table class="fleet-table">
+        <tr>
+          <th>Vehicle Type</th>
+          <th>Capacity</th>
+          <th>Best For</th>
+        </tr>
+        <tr>
+          <td>Lincoln Sedan / Town Car</td>
+          <td>1–3 passengers</td>
+          <td>Airport transfers, corporate</td>
+        </tr>
+        <tr>
+          <td>Ford Expedition SUV</td>
+          <td>1–5 passengers</td>
+          <td>Airport, families, groups</td>
+        </tr>
+        <tr>
+          <td>Stretch Limousine</td>
+          <td>Up to 10 passengers</td>
+          <td>Weddings, proms, special events</td>
+        </tr>
+        <tr>
+          <td>Passenger Van</td>
+          <td>Up to 14 passengers</td>
+          <td>Group shuttles, events</td>
+        </tr>
+        <tr>
+          <td>Luxury Executive Van</td>
+          <td>Up to 9 passengers</td>
+          <td>Corporate groups, mountain trips</td>
+        </tr>
+        <tr>
+          <td>Mini-Coach / Bus</td>
+          <td>Up to 55 passengers*</td>
+          <td>Large groups, conventions</td>
+        </tr>
+      </table>
+      <p style="font-size:11px; color:#888; font-style:italic;">*Through local and national affiliates.</p>
+
+      <h2>Why Choose A Custom Coach?</h2>
+      <p>
+        We are backed by an ambitious staff with the same drive to bring you the best possible service. The quality of what we offer combined with the care we provide is what makes us the best in town.
+      </p>
+      <p>
+        Our company will answer the phone live every time you call — we do not use auto-attendant. Unless all our staff are on the phones with other clients, we will personally answer your call.
+      </p>
+      <p>
+        We have long standing relationships with many accredited affiliations within the state of Colorado including the <strong>National Limousine Association</strong>, Colorado Limousine Association, and Denver Metro Convention Visitors Bureau.
+      </p>
+
+      <h2>Make a Reservation / Inquiry</h2>
+      <div class="contact-form">
+        <table>
+          <tr>
+            <td width="100">Your Name:</td>
+            <td><input type="text" name="name" /></td>
+          </tr>
+          <tr>
+            <td>Email:</td>
+            <td><input type="text" name="email" /></td>
+          </tr>
+          <tr>
+            <td>Phone:</td>
+            <td><input type="text" name="phone" /></td>
+          </tr>
+          <tr>
+            <td>Pickup Date:</td>
+            <td><input type="text" name="date" placeholder="MM/DD/YYYY" /></td>
+          </tr>
+          <tr>
+            <td>Service Needed:</td>
+            <td><input type="text" name="service" /></td>
+          </tr>
+          <tr>
+            <td>Message:</td>
+            <td><textarea name="message"></textarea></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><input type="submit" value="Submit Inquiry" /></td>
+          </tr>
+        </table>
+      </div>
+
+    </div><!-- /content -->
+
+    <!-- SIDEBAR -->
+    <div id="sidebar">
+
+      <h3>Contact Us</h3>
+      <div class="contact-box">
+        <div class="phone">(303) 759-1376</div>
+        <p>Local Denver</p>
+        <div class="phone" style="font-size:13px; margin-top:6px;">1-800-671-5466</div>
+        <p>Toll Free</p>
+        <p style="margin-top:8px; font-size:11px; color:#888;">Fax: (303) 373-5251</p>
+      </div>
+
+      <a href="#" class="book-btn">Request a Reservation</a>
+
+      <h3 style="margin-top:4px;">Quick Links</h3>
+      <ul>
+        <li><a href="#">Airport Transfers (DIA)</a></li>
+        <li><a href="#">Mountain / Ski Resorts</a></li>
+        <li><a href="#">Corporate Travel</a></li>
+        <li><a href="#">Weddings</a></li>
+        <li><a href="#">Special Events</a></li>
+        <li><a href="#">Meet &amp; Greet</a></li>
+        <li><a href="#">Our Fleet</a></li>
+        <li><a href="#">About John Hafer</a></li>
+      </ul>
+
+      <h3 style="margin-top:14px;">Affiliations</h3>
+      <div class="badge-row">
+        <div class="badge">BBB<br>A+</div>
+        <div class="badge">NLA<br>Member</div>
+        <div class="badge">DIA<br>Board</div>
+      </div>
+      <p style="font-size:11px; color:#888; margin-top:4px;">
+        Member of the Ground Transportation Board at Denver International Airport since <strong>1995</strong>.
+      </p>
+      <p style="font-size:11px; color:#888;">
+        Vice President, Colorado Limousine Association — over 20 years.
+      </p>
+      <p style="font-size:11px; color:#888;">
+        National Limousine Association member.
+      </p>
+
+      <h3 style="margin-top:14px;">Service Area</h3>
+      <p>Denver Metro · Boulder · Colorado Springs · Vail · Breckenridge · Aspen · Beaver Creek · Keystone · All Colorado ski resorts</p>
+
+    </div><!-- /sidebar -->
+
+  </div><!-- /main -->
+
+  <!-- FOOTER -->
+  <div id="footer">
+    <div class="footer-links">
+      <a href="#">Home</a>
+      <a href="#">About Us</a>
+      <a href="#">Services</a>
+      <a href="#">Fleet</a>
+      <a href="#">Reservations</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <p>A Custom Coach / Boulder Transportation &nbsp;|&nbsp; 5105 E Missouri Avenue, Denver, CO 80246</p>
+    <p style="margin-top:4px;">&copy; 2013 A Custom Coach Transportation. All Rights Reserved. &nbsp;|&nbsp; <a href="#">Privacy Policy</a></p>
+    <p style="margin-top:6px; color: #555555; font-size: 10px;">Established 1988 &nbsp;&bull;&nbsp; BBB Accredited A+ &nbsp;&bull;&nbsp; National Limousine Association &nbsp;&bull;&nbsp; Colorado Limousine Association &nbsp;&bull;&nbsp; Denver Metro Convention &amp; Visitors Bureau</p>
+  </div>
+
+</div><!-- /wrapper -->
+
+</body>
+</html>

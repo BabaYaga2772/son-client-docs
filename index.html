@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SON Client Docs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:   #0d0d0d;
+    --bg2:     #141414;
+    --bg3:     #1a1a1a;
+    --border:  #2a2a2a;
+    --gold:    #D4AF37;
+    --gold2:   #b8961f;
+    --white:   #F5F0E8;
+    --gray:    #888;
+    --gray2:   #555;
+    --serif:   'Cormorant Garamond', Georgia, serif;
+    --mono:    'DM Mono', monospace;
+    --sans:    'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 0 48px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    background: rgba(13,13,13,0.95);
+    backdrop-filter: blur(12px);
+    z-index: 100;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .logo-mark {
+    width: 36px;
+    height: 36px;
+    border: 1.5px solid var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 1px;
+  }
+
+  .logo-text {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  .logo-text strong {
+    display: block;
+    color: var(--white);
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: 500;
+  }
+
+  .header-meta {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--gray2);
+    text-transform: uppercase;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 48px 60px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(212,175,55,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .hero-title {
+    font-family: var(--serif);
+    font-size: clamp(42px, 6vw, 72px);
+    font-weight: 600;
+    line-height: 1.0;
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.6;
+    max-width: 480px;
+    font-weight: 300;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 48px;
+    margin-top: 48px;
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray2);
+    margin-top: 4px;
+  }
+
+  /* ── MAIN GRID ── */
+  main {
+    padding: 48px;
+    max-width: 1400px;
+  }
+
+  .grid-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+
+  .grid-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .grid-count {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gray2);
+    letter-spacing: 1px;
+  }
+
+  /* ── CLIENT CARD ── */
+  .client-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    margin-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .client-card:hover { border-color: var(--gold2); }
+
+  .client-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 28px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .client-card-header:hover .client-name { color: var(--gold); }
+
+  .client-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .client-index {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gray2);
+    letter-spacing: 2px;
+    width: 24px;
+  }
+
+  .client-name {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--white);
+    transition: color 0.2s;
+  }
+
+  .client-industry {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray2);
+    margin-top: 2px;
+  }
+
+  .client-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .status-chip {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid;
+  }
+
+  .status-active   { color: #6fcf97; border-color: rgba(111,207,151,0.3); background: rgba(111,207,151,0.06); }
+  .status-proposal { color: var(--gold); border-color: rgba(212,175,55,0.3); background: rgba(212,175,55,0.06); }
+  .status-prospect { color: var(--gray); border-color: var(--border); }
+
+  .doc-count {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gray2);
+    letter-spacing: 1px;
+  }
+
+  .chevron {
+    color: var(--gray2);
+    transition: transform 0.25s;
+    font-size: 10px;
+  }
+
+  .client-card.open .chevron { transform: rotate(90deg); }
+
+  /* ── DOC LIST ── */
+  .doc-list {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 0 28px 20px 72px;
+  }
+
+  .client-card.open .doc-list { display: block; }
+
+  .doc-list-inner {
+    padding-top: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+  }
+
+  .doc-link {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 18px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s;
+    group: true;
+  }
+
+  .doc-link:hover {
+    border-color: var(--gold);
+    background: rgba(212,175,55,0.04);
+  }
+
+  .doc-icon {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    color: var(--gold);
+  }
+
+  .doc-info { flex: 1; min-width: 0; }
+
+  .doc-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .doc-link:hover .doc-name { color: var(--gold); }
+
+  .doc-type {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray2);
+    margin-top: 2px;
+  }
+
+  .doc-arrow {
+    font-size: 11px;
+    color: var(--gray2);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .doc-link:hover .doc-arrow { opacity: 1; color: var(--gold); }
+
+  /* ── PLACEHOLDER CLIENT ── */
+  .client-card.placeholder {
+    opacity: 0.35;
+    pointer-events: none;
+  }
+
+  .placeholder .client-name { color: var(--gray); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 48px;
+  }
+
+  .footer-left {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gray2);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  .footer-right {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--gray2);
+    letter-spacing: 1px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .client-card { animation: fadeUp 0.4s ease both; }
+  .client-card:nth-child(1) { animation-delay: 0.05s; }
+  .client-card:nth-child(2) { animation-delay: 0.12s; }
+  .client-card:nth-child(3) { animation-delay: 0.19s; }
+
+  @media (max-width: 768px) {
+    header, .hero, main, footer { padding-left: 20px; padding-right: 20px; }
+    .hero-stats { gap: 28px; }
+    .doc-list { padding-left: 20px; }
+    .client-card-header { padding: 16px 20px; }
+    .hero-title { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <div class="logo-mark">SON</div>
+    <div class="logo-text">
+      <strong>Speed of Now</strong>
+      Client Documentation
+    </div>
+  </div>
+  <div class="header-meta" id="live-date"></div>
+</header>
+
+<div class="hero">
+  <div class="hero-eyebrow">Internal · Speed of Now Productions</div>
+  <h1 class="hero-title">Client<br><em>Workspace</em></h1>
+  <p class="hero-sub">Research, proposals, competitive analyses, and reference documents for active and prospective clients.</p>
+  <div class="hero-stats">
+    <div>
+      <div class="stat-num" id="stat-clients">1</div>
+      <div class="stat-label">Active Clients</div>
+    </div>
+    <div>
+      <div class="stat-num" id="stat-docs">2</div>
+      <div class="stat-label">Documents</div>
+    </div>
+    <div>
+      <div class="stat-num">∞</div>
+      <div class="stat-label">In Progress</div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="grid-header">
+    <div class="grid-title">Client Projects</div>
+    <div class="grid-count" id="client-count">1 client · 2 documents</div>
+  </div>
+
+  <!-- ══ A CUSTOM COACH ══ -->
+  <div class="client-card open" id="card-acc">
+    <div class="client-card-header" onclick="toggleCard('card-acc')">
+      <div class="client-left">
+        <div class="client-index">01</div>
+        <div>
+          <div class="client-name">A Custom Coach</div>
+          <div class="client-industry">Luxury Ground Transportation · Denver, CO</div>
+        </div>
+      </div>
+      <div class="client-right">
+        <div class="status-chip status-proposal">Proposal Stage</div>
+        <div class="doc-count">2 docs</div>
+        <div class="chevron">▶</div>
+      </div>
+    </div>
+    <div class="doc-list">
+      <div class="doc-list-inner">
+        <a class="doc-link" href="acc/competitive-analysis.html" target="_blank">
+          <div class="doc-icon">📊</div>
+          <div class="doc-info">
+            <div class="doc-name">Competitive Analysis</div>
+            <div class="doc-type">Market Research · 10 Competitors</div>
+          </div>
+          <div class="doc-arrow">↗</div>
+        </a>
+        <a class="doc-link" href="acc/old-site-reference.html" target="_blank">
+          <div class="doc-icon">🗂</div>
+          <div class="doc-info">
+            <div class="doc-name">Old Site Reference</div>
+            <div class="doc-type">Archive · 2013 Site Recreation</div>
+          </div>
+          <div class="doc-arrow">↗</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ PLACEHOLDER: NEXT CLIENT ══ -->
+  <div class="client-card placeholder">
+    <div class="client-card-header">
+      <div class="client-left">
+        <div class="client-index">02</div>
+        <div>
+          <div class="client-name">Next Client</div>
+          <div class="client-industry">Add folder to /clientname/ and update index</div>
+        </div>
+      </div>
+      <div class="client-right">
+        <div class="status-chip status-prospect">Incoming</div>
+        <div class="doc-count">—</div>
+        <div class="chevron">▶</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="footer-left">Speed of Now Productions · Internal Use</div>
+  <div class="footer-right" id="footer-date"></div>
+</footer>
+
+<script>
+  function toggleCard(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+
+  // Live date
+  const now = new Date();
+  const opts = { year:'numeric', month:'long', day:'numeric' };
+  const dateStr = now.toLocaleDateString('en-US', opts);
+  document.getElementById('live-date').textContent = dateStr;
+  document.getElementById('footer-date').textContent = 'Last updated · ' + dateStr;
+</script>
+</body>
+</html>
