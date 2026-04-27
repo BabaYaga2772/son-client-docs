@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alabama Vinyl — Project Documents</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0d0d0d; --bg2: #141414; --bg3: #1a1a1a; --border: #2a2a2a;
+    --red: #CC2200; --white: #F5F0E8; --gray: #888; --gray2: #555;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --mono: 'DM Mono', monospace; --sans: 'DM Sans', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--black); color: var(--white); font-family: var(--sans); font-size: 14px; line-height: 1.7; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 48px 24px; }
+  .eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 12px; text-align: center; }
+  h1 { font-family: var(--serif); font-size: 48px; font-weight: 600; text-align: center; margin-bottom: 8px; }
+  h1 em { font-style: italic; color: var(--red); }
+  .sub { color: var(--gray); font-size: 14px; text-align: center; margin-bottom: 48px; }
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; max-width: 720px; width: 100%; }
+  .card { background: var(--bg2); border: 1px solid var(--border); padding: 28px; text-decoration: none; color: inherit; transition: border-color 0.15s; display: block; }
+  .card:hover { border-color: var(--red); }
+  .card-num { font-family: var(--mono); font-size: 10px; color: var(--red); margin-bottom: 10px; letter-spacing: 2px; }
+  .card-title { font-family: var(--serif); font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+  .card-desc { font-size: 12px; color: var(--gray); line-height: 1.6; }
+  .footer-note { font-family: var(--mono); font-size: 10px; color: var(--gray2); text-align: center; margin-top: 40px; letter-spacing: 1px; }
+  @media (max-width: 600px) { .cards { grid-template-columns: 1fr; } h1 { font-size: 32px; } }
+</style>
+</head>
+<body>
+  <div class="eyebrow">Speed of Now Digital · Client Documents</div>
+  <h1>Alabama <em>Vinyl</em></h1>
+  <p class="sub">Alabama Vinyl and Print Company · alabamavinyl.com · Hoover, AL</p>
+  <div class="cards">
+    <a class="card" href="project-summary.html">
+      <div class="card-num">01 — Project Summary</div>
+      <div class="card-title">Project Overview</div>
+      <div class="card-desc">Scope, payment schedule, phase timeline, and all contracted deliverables for the Option B full rebuild.</div>
+    </a>
+    <a class="card" href="site-analysis.html">
+      <div class="card-num">02 — Site Analysis</div>
+      <div class="card-title">Digital Health Audit</div>
+      <div class="card-desc">64.3/100 baseline audit across 5 weighted categories. Issue breakdown, priority fixes, and projected post-rebuild score.</div>
+    </a>
+    <a class="card" href="competitive-analysis.html">
+      <div class="card-num">03 — Competitive Analysis</div>
+      <div class="card-title">Market Positioning</div>
+      <div class="card-desc">Analysis of the 3 local competitors Tiffany identified. What they're doing wrong and how Alabama Vinyl wins the market.</div>
+    </a>
+    <a class="card" href="old-site-reference.html">
+      <div class="card-num">04 — Current Site Reference</div>
+      <div class="card-title">Before the Rebuild</div>
+      <div class="card-desc">Documentation of the existing site — layout reconstruction, issue annotations, page inventory, and before/after comparison.</div>
+    </a>
+  </div>
+  <div class="footer-note">Speed of Now Digital · Two Times Designs · Bobby Siens · <span id="yr"></span></div>
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</body>
+</html>

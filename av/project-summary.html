@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alabama Vinyl — Project Summary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:  #0d0d0d;
+    --bg2:    #141414;
+    --bg3:    #1a1a1a;
+    --border: #2a2a2a;
+    --red:    #CC2200;
+    --white:  #F5F0E8;
+    --gray:   #888;
+    --gray2:  #555;
+    --green:  #6fcf97;
+    --yellow: #f2c94c;
+    --serif:  'Cormorant Garamond', Georgia, serif;
+    --mono:   'DM Mono', monospace;
+    --sans:   'DM Sans', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--black); color: var(--white); font-family: var(--sans); font-size: 14px; line-height: 1.7; }
+
+  header { border-bottom: 1px solid var(--border); padding: 24px 48px; display: flex; align-items: center; justify-content: space-between; }
+  .header-brand { font-family: var(--mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); }
+  .header-brand strong { color: var(--white); display: block; font-size: 12px; margin-bottom: 2px; }
+  .header-date { font-family: var(--mono); font-size: 10px; color: var(--gray2); letter-spacing: 1px; }
+
+  .hero { padding: 64px 48px 0; }
+  .eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+  .hero h1 { font-family: var(--serif); font-size: 54px; font-weight: 600; line-height: 1.0; margin-bottom: 16px; }
+  .hero h1 em { font-style: italic; color: var(--red); }
+  .hero-sub { color: var(--gray); font-size: 15px; max-width: 600px; font-weight: 300; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
+
+  .meta-bar { display: flex; border-bottom: 1px solid var(--border); }
+  .meta-item { flex: 1; padding: 28px 36px; border-right: 1px solid var(--border); }
+  .meta-item:last-child { border-right: none; }
+  .meta-label { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray2); margin-bottom: 6px; }
+  .meta-value { font-size: 15px; color: var(--white); font-weight: 500; }
+  .meta-value.red { color: var(--red); }
+  .meta-value.green { color: var(--green); }
+
+  .content { max-width: 960px; margin: 0 auto; padding: 56px 48px; }
+  .section { margin-bottom: 56px; }
+  .section-label { font-family: var(--mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+  .section-title { font-family: var(--serif); font-size: 30px; font-weight: 600; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+
+  /* Scope table */
+  .scope-table { width: 100%; border-collapse: collapse; }
+  .scope-table th { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray2); text-align: left; padding: 10px 16px; border-bottom: 1px solid var(--border); }
+  .scope-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 13px; color: #ccc; vertical-align: top; }
+  .scope-table tr:last-child td { border-bottom: none; }
+  .scope-table td:first-child { color: var(--white); font-weight: 500; width: 220px; }
+  .included { color: var(--green); font-family: var(--mono); font-size: 11px; }
+  .excluded { color: var(--gray2); font-family: var(--mono); font-size: 11px; }
+
+  /* Phase timeline */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .phase { display: flex; gap: 0; }
+  .phase-num { flex-shrink: 0; width: 64px; display: flex; flex-direction: column; align-items: center; padding-top: 4px; }
+  .phase-circle { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 11px; color: var(--gray2); background: var(--bg2); flex-shrink: 0; }
+  .phase-circle.done { border-color: var(--green); color: var(--green); background: rgba(111,207,151,0.08); }
+  .phase-circle.active { border-color: var(--red); color: var(--red); background: rgba(204,34,0,0.08); }
+  .phase-line { width: 1px; flex: 1; background: var(--border); margin-top: 4px; min-height: 40px; }
+  .phase:last-child .phase-line { display: none; }
+  .phase-content { flex: 1; padding: 0 0 36px 20px; }
+  .phase-title { font-size: 15px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+  .phase-status { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+  .phase-status.done { color: var(--green); }
+  .phase-status.active { color: var(--red); }
+  .phase-status.pending { color: var(--gray2); }
+  .phase-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+  /* Payment table */
+  .payment-table { width: 100%; border-collapse: collapse; }
+  .payment-table th { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray2); text-align: left; padding: 10px 16px; border-bottom: 1px solid var(--border); }
+  .payment-table td { padding: 16px; border-bottom: 1px solid var(--border); font-size: 13px; color: #ccc; }
+  .payment-table tr:last-child td { border-bottom: none; }
+  .payment-table td:first-child { color: var(--white); font-weight: 500; }
+  .amount { font-family: var(--mono); font-size: 16px; color: var(--white); }
+  .paid-badge { display: inline-block; background: rgba(111,207,151,0.12); color: var(--green); font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; }
+  .pending-badge { display: inline-block; background: rgba(242,201,76,0.1); color: var(--yellow); font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; padding: 3px 10px; }
+
+  /* Deliverables grid */
+  .deliverables { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .del-card { background: var(--bg2); border: 1px solid var(--border); padding: 20px; }
+  .del-num { font-family: var(--mono); font-size: 10px; color: var(--red); margin-bottom: 8px; }
+  .del-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 6px; }
+  .del-desc { font-size: 12px; color: var(--gray); line-height: 1.6; }
+
+  footer { border-top: 1px solid var(--border); padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-left { font-family: var(--mono); font-size: 10px; color: var(--gray2); letter-spacing: 2px; text-transform: uppercase; }
+  .footer-right { font-family: var(--mono); font-size: 10px; color: var(--gray2); }
+
+  @media (max-width: 768px) {
+    header, .hero, .content, footer { padding-left: 20px; padding-right: 20px; }
+    .hero h1 { font-size: 36px; }
+    .meta-bar { flex-direction: column; }
+    .meta-item { border-right: none; border-bottom: 1px solid var(--border); }
+    .deliverables { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-brand">
+    <strong>Speed of Now Digital</strong>
+    Project Summary — Alabama Vinyl and Print Company
+  </div>
+  <div class="header-date" id="doc-date"></div>
+</header>
+
+<div class="hero">
+  <div class="eyebrow">Option B — Full Front-End Rebuild · Shopify · Hoover, AL</div>
+  <h1>Project <em>Summary</em></h1>
+  <p class="hero-sub">Complete project overview for the Alabama Vinyl and Print Company website rebuild. Scope, payment schedule, phase timeline, and all contracted deliverables.</p>
+</div>
+
+<div class="meta-bar">
+  <div class="meta-item">
+    <div class="meta-label">Client</div>
+    <div class="meta-value">Tiffany Crocker</div>
+  </div>
+  <div class="meta-item">
+    <div class="meta-label">Business</div>
+    <div class="meta-value">Alabama Vinyl and Print Company</div>
+  </div>
+  <div class="meta-item">
+    <div class="meta-label">Platform</div>
+    <div class="meta-value">Shopify (Front-End Only)</div>
+  </div>
+  <div class="meta-item">
+    <div class="meta-label">Contract Value</div>
+    <div class="meta-value red">$4,000</div>
+  </div>
+  <div class="meta-item">
+    <div class="meta-label">Deposit Status</div>
+    <div class="meta-value green">Received ✓</div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- SCOPE -->
+  <div class="section">
+    <div class="section-label">Contracted Scope</div>
+    <div class="section-title">What's In / What's Out</div>
+    <table class="scope-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Status</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Custom Front-End Design</td>
+          <td><span class="included">✓ Included</span></td>
+          <td>Up to 8 pages. Shopify Impulse theme rebuilt with custom design — backend untouched.</td>
+        </tr>
+        <tr>
+          <td>Custom Logo Upload / DTF Ordering Flow</td>
+          <td><span class="included">✓ Included</span></td>
+          <td>Drip Apps gang sheet builder already installed — fix configuration and redesign the UX flow. Three ordering paths: by size, gang sheet builder, pre-built upload.</td>
+        </tr>
+        <tr>
+          <td>Ready-to-Press Designs Section</td>
+          <td><span class="included">✓ Included</span></td>
+          <td>Client-manageable post-launch. Tiffany adds new designs via Shopify admin. Post-launch training walkthrough included.</td>
+        </tr>
+        <tr>
+          <td>Scalable Navigation Architecture</td>
+          <td><span class="included">✓ Included</span></td>
+          <td>Built for future expansion: stickers, banners, promo items can be added without redesign. Tiffany adds products; no dev work required.</td>
+        </tr>
+        <tr>
+          <td>On-Page + Local SEO</td>
+          <td><span class="included">✓ Included</span></td>
+          <td>Schema markup, Open Graph, canonical URLs, Google Business alignment. Target: #1 local ranking for vinyl/DTF searches.</td>
+        </tr>
+        <tr>
+          <td>ADA / WCAG 2.1 AA Compliance</td>
+          <td><span class="included">✓ Included</span></td>
+          <td>Color contrast, alt text, keyboard navigation, focus states, form labels.</td>
+        </tr>
+        <tr>
+          <td>Analytics + Tag Manager</td>
+          <td><span class="included">✓ Included</span></td>
+          <td>Google Analytics 4 + Google Tag Manager installation and configuration.</td>
+        </tr>
+        <tr>
+          <td>Brand Asset Delivery</td>
+          <td><span class="included">✓ Included</span></td>
+          <td>Logo files (AI/EPS/PNG), color codes, fonts — all in print-ready formats for business cards, signage, apparel.</td>
+        </tr>
+        <tr>
+          <td>Post-Launch Training</td>
+          <td><span class="included">✓ Included</span></td>
+          <td>Shopify admin walkthrough — adding products, updating designs, managing the announcement bar.</td>
+        </tr>
+        <tr>
+          <td>30-Day Bug-Fix Period</td>
+          <td><span class="included">✓ Included</span></td>
+          <td>Post-launch bug fixes at no charge for 30 days.</td>
+        </tr>
+        <tr>
+          <td>Shopify Backend / Platform Changes</td>
+          <td><span class="excluded">✗ Out of Scope</span></td>
+          <td>Backend stays untouched. No schema changes, no app installs beyond what's already there.</td>
+        </tr>
+        <tr>
+          <td>Product Photography</td>
+          <td><span class="excluded">✗ Out of Scope</span></td>
+          <td>Inconsistent product imagery flagged to Tiffany — reshooting is not in scope. High-quality mockups used where needed.</td>
+        </tr>
+        <tr>
+          <td>Additional Pages Beyond 8</td>
+          <td><span class="excluded">✗ Out of Scope</span></td>
+          <td>Additional pages scoped and priced separately. New product categories (stickers, banners) = navigation slots only, not full page builds.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PHASE TIMELINE -->
+  <div class="section">
+    <div class="section-label">Project Timeline</div>
+    <div class="section-title">Phase Overview</div>
+    <div class="timeline">
+      <div class="phase">
+        <div class="phase-num">
+          <div class="phase-circle done">0</div>
+          <div class="phase-line"></div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title">Pre-Build — Discovery & Audit</div>
+          <div class="phase-status done">Complete</div>
+          <div class="phase-desc">In-store visit, discovery call (52 min), digital health audit (64.3/100), proposal sent and accepted, contract signed, $2,000 deposit received. Welcome Aboard packet delivered.</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">
+          <div class="phase-circle active">1</div>
+          <div class="phase-line"></div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title">Kickoff — Brand Discovery & Asset Collection</div>
+          <div class="phase-status active">In Progress</div>
+          <div class="phase-desc">Kickoff call complete. Collecting brand assets (logo files, color codes, fonts, product photos). Shopify collaborator access granted. Competitor analysis complete. Design brief locked.</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">
+          <div class="phase-circle">2</div>
+          <div class="phase-line"></div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title">Design — Wireframes & Mockups</div>
+          <div class="phase-status pending">Pending Asset Delivery</div>
+          <div class="phase-desc">Low-fidelity wireframes → client review → high-fidelity mockups (homepage + DTF page) → client approval. Up to 2 revision rounds. Milestone check-in before development begins. $1,000 due at mockup approval.</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">
+          <div class="phase-circle">3</div>
+          <div class="phase-line"></div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title">Development — Shopify Build</div>
+          <div class="phase-status pending">Pending Design Approval</div>
+          <div class="phase-desc">Duplicate live theme → build on staging copy → implement all 8 pages → SEO pass → accessibility audit → QA. Milestone check-in before launch. Client never sees a broken live site.</div>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num">
+          <div class="phase-circle">4</div>
+        </div>
+        <div class="phase-content">
+          <div class="phase-title">Launch — QA, Training & Handoff</div>
+          <div class="phase-status pending">Pending Development</div>
+          <div class="phase-desc">Final pre-launch review → publish new theme → GA4 + GTM verification → post-launch training walkthrough → brand asset delivery → 30-day bug-fix period begins. $1,000+ due at launch.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAYMENT SCHEDULE -->
+  <div class="section">
+    <div class="section-label">Financial</div>
+    <div class="section-title">Payment Schedule</div>
+    <table class="payment-table">
+      <thead>
+        <tr>
+          <th>Milestone</th>
+          <th>Amount</th>
+          <th>Due</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Deposit — Project Start</td>
+          <td><span class="amount">$2,000</span></td>
+          <td style="color:var(--gray); font-size:12px;">April 20, 2026</td>
+          <td><span class="paid-badge">✓ Received</span></td>
+        </tr>
+        <tr>
+          <td>Design Mockup Approval</td>
+          <td><span class="amount">$1,000</span></td>
+          <td style="color:var(--gray); font-size:12px;">Upon Approval</td>
+          <td><span class="pending-badge">Pending</span></td>
+        </tr>
+        <tr>
+          <td>Launch</td>
+          <td><span class="amount">$1,000+</span></td>
+          <td style="color:var(--gray); font-size:12px;">Upon Launch</td>
+          <td><span class="pending-badge">Pending</span></td>
+        </tr>
+        <tr style="background:rgba(204,34,0,0.04);">
+          <td><strong>Total</strong></td>
+          <td><span class="amount" style="color:var(--red);">$4,000</span></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- DELIVERABLES -->
+  <div class="section">
+    <div class="section-label">Deliverables</div>
+    <div class="section-title">What You Receive at Project Close</div>
+    <div class="deliverables">
+      <div class="del-card">
+        <div class="del-num">01</div>
+        <div class="del-title">Rebuilt Shopify Front-End</div>
+        <div class="del-desc">8 custom-designed pages live on alabamavinyl.com. New theme published, old theme archived as backup.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-num">02</div>
+        <div class="del-title">DTF Ordering Flow</div>
+        <div class="del-desc">Three clearly labeled ordering paths with customer guidance. Drip Apps properly configured. Custom logo upload working.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-num">03</div>
+        <div class="del-title">Brand Asset Package</div>
+        <div class="del-desc">Logo in AI, EPS, and PNG formats. Exact color hex codes. Font files. Print-ready versions for business cards, signage, and apparel.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-num">04</div>
+        <div class="del-title">SEO Foundation</div>
+        <div class="del-desc">LocalBusiness schema, corrected title tags and H1s, Open Graph images, canonical URLs, Google Business alignment.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-num">05</div>
+        <div class="del-title">Analytics Setup</div>
+        <div class="del-desc">Google Analytics 4 and Google Tag Manager installed, configured, and verified. Baseline traffic data collection begins at launch.</div>
+      </div>
+      <div class="del-card">
+        <div class="del-num">06</div>
+        <div class="del-title">Training Walkthrough</div>
+        <div class="del-desc">Recorded Shopify admin walkthrough — adding products, updating designs, managing the announcement bar. Tiffany can run the site independently post-launch.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">Speed of Now Digital · Alabama Vinyl · Project Summary</div>
+  <div class="footer-right" id="footer-date"></div>
+</footer>
+
+<script>
+  const d = new Date();
+  const s = d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  document.getElementById('doc-date').textContent = s;
+  document.getElementById('footer-date').textContent = 'Produced ' + s;
+</script>
+</body>
+</html>

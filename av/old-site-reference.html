@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alabama Vinyl — Current Site Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:  #0d0d0d;
+    --bg2:    #141414;
+    --bg3:    #1a1a1a;
+    --border: #2a2a2a;
+    --red:    #CC2200;
+    --white:  #F5F0E8;
+    --gray:   #888;
+    --gray2:  #555;
+    --green:  #6fcf97;
+    --yellow: #f2c94c;
+    --danger: #eb5757;
+    --serif:  'Cormorant Garamond', Georgia, serif;
+    --mono:   'DM Mono', monospace;
+    --sans:   'DM Sans', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--black); color: var(--white); font-family: var(--sans); font-size: 14px; line-height: 1.7; }
+
+  header { border-bottom: 1px solid var(--border); padding: 24px 48px; display: flex; align-items: center; justify-content: space-between; }
+  .header-brand { font-family: var(--mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); }
+  .header-brand strong { color: var(--white); display: block; font-size: 12px; margin-bottom: 2px; }
+  .header-date { font-family: var(--mono); font-size: 10px; color: var(--gray2); letter-spacing: 1px; }
+
+  .hero { padding: 64px 48px 0; }
+  .eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+  .hero h1 { font-family: var(--serif); font-size: 54px; font-weight: 600; line-height: 1.0; margin-bottom: 16px; }
+  .hero h1 em { font-style: italic; color: var(--red); }
+  .hero-sub { color: var(--gray); font-size: 15px; max-width: 600px; font-weight: 300; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
+
+  .content { max-width: 960px; margin: 0 auto; padding: 56px 48px; }
+  .section { margin-bottom: 56px; }
+  .section-label { font-family: var(--mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+  .section-title { font-family: var(--serif); font-size: 30px; font-weight: 600; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+
+  /* Current site mockup */
+  .site-mockup { background: #1a1a1a; border: 1px solid var(--border); overflow: hidden; }
+  .browser-bar { background: #111; border-bottom: 1px solid var(--border); padding: 10px 16px; display: flex; align-items: center; gap: 12px; }
+  .browser-dots { display: flex; gap: 6px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.r { background: #ff5f57; }
+  .dot.y { background: #febc2e; }
+  .dot.g { background: #28c840; }
+  .browser-url { background: #222; border: 1px solid #333; border-radius: 4px; padding: 4px 12px; font-family: var(--mono); font-size: 11px; color: var(--gray); flex: 1; max-width: 400px; }
+
+  /* Simulated current site */
+  .sim-site { font-family: var(--sans); }
+  .sim-announce { background: #CC2200; color: white; text-align: center; padding: 8px; font-size: 12px; letter-spacing: 1px; }
+  .sim-header { background: #000; padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #222; }
+  .sim-logo-area { display: flex; align-items: center; gap: 12px; }
+  .sim-logo-circle { width: 52px; height: 52px; border-radius: 50%; background: #CC2200; border: 2px solid #fff; display: flex; align-items: center; justify-content: center; font-size: 8px; color: white; text-align: center; font-weight: bold; line-height: 1.2; }
+  .sim-nav { display: flex; gap: 14px; flex-wrap: wrap; }
+  .sim-nav a { color: #ccc; font-size: 11px; text-decoration: none; }
+  .sim-hero { background: #111; padding: 40px 24px; text-align: center; border-bottom: 1px solid #222; position: relative; }
+  .sim-hero-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #1a0000 0%, #0d0d0d 100%); opacity: 0.8; }
+  .sim-hero-content { position: relative; z-index: 1; }
+  .sim-hero h2 { font-size: 22px; color: white; margin-bottom: 8px; font-weight: 700; }
+  .sim-hero p { font-size: 13px; color: #888; margin-bottom: 16px; }
+  .sim-btn { display: inline-block; background: #CC2200; color: white; padding: 10px 24px; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; }
+  .sim-products { padding: 24px; background: #0d0d0d; }
+  .sim-products-title { font-size: 16px; font-weight: 600; color: white; margin-bottom: 16px; text-align: center; }
+  .sim-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .sim-product { background: #1a1a1a; border: 1px solid #222; padding: 12px; }
+  .sim-product-img { background: #222; height: 80px; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; font-size: 10px; color: #555; }
+  .sim-product-name { font-size: 11px; color: #ccc; margin-bottom: 4px; }
+  .sim-product-price { font-size: 12px; color: var(--red); font-weight: 600; }
+  .sim-footer { background: #000; border-top: 1px solid #222; padding: 16px 24px; text-align: center; font-size: 11px; color: #555; }
+
+  /* Issue annotations */
+  .issues-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
+  .issue-card { background: var(--bg2); border: 1px solid var(--border); padding: 20px; border-left: 3px solid; }
+  .issue-card.critical { border-left-color: var(--danger); }
+  .issue-card.warning { border-left-color: var(--yellow); }
+  .issue-card.info { border-left-color: var(--gray2); }
+  .issue-severity { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+  .issue-severity.critical { color: var(--danger); }
+  .issue-severity.warning { color: var(--yellow); }
+  .issue-severity.info { color: var(--gray2); }
+  .issue-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 6px; }
+  .issue-desc { font-size: 12px; color: var(--gray); line-height: 1.6; }
+
+  /* Before/After */
+  .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--border); }
+  .ba-col { padding: 28px; }
+  .ba-col.before { border-right: 1px solid var(--border); background: rgba(235,87,87,0.03); }
+  .ba-col.after { background: rgba(111,207,151,0.03); }
+  .ba-label { font-family: var(--mono); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
+  .ba-label.before { color: var(--danger); }
+  .ba-label.after { color: var(--green); }
+  .ba-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .ba-list li { font-size: 13px; color: var(--gray); display: flex; gap: 10px; align-items: flex-start; }
+  .ba-list li .icon { flex-shrink: 0; margin-top: 2px; }
+
+  /* Page inventory */
+  .page-table { width: 100%; border-collapse: collapse; }
+  .page-table th { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray2); text-align: left; padding: 10px 16px; border-bottom: 1px solid var(--border); }
+  .page-table td { padding: 13px 16px; border-bottom: 1px solid var(--border); font-size: 13px; color: #ccc; vertical-align: top; }
+  .page-table tr:last-child td { border-bottom: none; }
+  .page-table td:first-child { font-family: var(--mono); font-size: 12px; color: var(--gray); }
+  .page-table td:nth-child(2) { color: var(--white); font-weight: 500; }
+  .status-tag { display: inline-block; font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; }
+  .status-tag.broken { background: rgba(235,87,87,0.1); color: var(--danger); }
+  .status-tag.weak { background: rgba(242,201,76,0.1); color: var(--yellow); }
+  .status-tag.ok { background: rgba(111,207,151,0.1); color: var(--green); }
+  .status-tag.rebuild { background: rgba(204,34,0,0.1); color: var(--red); }
+
+  footer { border-top: 1px solid var(--border); padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-left { font-family: var(--mono); font-size: 10px; color: var(--gray2); letter-spacing: 2px; text-transform: uppercase; }
+  .footer-right { font-family: var(--mono); font-size: 10px; color: var(--gray2); }
+
+  @media (max-width: 768px) {
+    header, .hero, .content, footer { padding-left: 20px; padding-right: 20px; }
+    .hero h1 { font-size: 36px; }
+    .issues-grid, .ba-grid { grid-template-columns: 1fr; }
+    .sim-grid { grid-template-columns: repeat(2, 1fr); }
+    .sim-nav { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-brand">
+    <strong>Speed of Now Digital</strong>
+    Current Site Reference — Alabama Vinyl and Print Company
+  </div>
+  <div class="header-date" id="doc-date"></div>
+</header>
+
+<div class="hero">
+  <div class="eyebrow">Alabama Vinyl and Print Company · alabamavinyl.com · Audited April 2026</div>
+  <h1>Current Site <em>Reference</em></h1>
+  <p class="hero-sub">Documentation of the existing alabamavinyl.com site prior to the contracted rebuild. This is the baseline — what we're replacing and why.</p>
+</div>
+
+<div class="content">
+
+  <!-- SIMULATED CURRENT SITE -->
+  <div class="section">
+    <div class="section-label">Visual Reference</div>
+    <div class="section-title">Current Site — Reconstructed Layout</div>
+    <div class="site-mockup">
+      <div class="browser-bar">
+        <div class="browser-dots">
+          <div class="dot r"></div>
+          <div class="dot y"></div>
+          <div class="dot g"></div>
+        </div>
+        <div class="browser-url">alabamavinyl.com</div>
+      </div>
+      <div class="sim-site">
+        <div class="sim-announce">FREE SHIPPING ON ORDERS OVER $75 · ALABAMAVINYL.COM</div>
+        <div class="sim-header">
+          <div class="sim-logo-area">
+            <div class="sim-logo-circle">ALA<br>BAMA<br>VINYL</div>
+            <div style="color:#ccc; font-size:13px; font-weight:600;">Alabama Vinyl<br><span style="font-size:10px; color:#888; font-weight:400;">and Print Company</span></div>
+          </div>
+          <div class="sim-nav">
+            <a href="#">Home</a>
+            <a href="#">Shop All</a>
+            <a href="#">Vinyl</a>
+            <a href="#">DTF Transfers</a>
+            <a href="#">Ready to Press</a>
+            <a href="#">Blanks</a>
+            <a href="#">Accessories</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a href="#">FAQ</a>
+          </div>
+        </div>
+        <div class="sim-hero">
+          <div class="sim-hero-bg"></div>
+          <div class="sim-hero-content">
+            <h2>Prints Supply</h2>
+            <p>Quality vinyl, DTF transfers, and ready-to-press designs for crafters and businesses.</p>
+            <div class="sim-btn">Shop Now</div>
+          </div>
+        </div>
+        <div class="sim-products">
+          <div class="sim-products-title">Featured Products</div>
+          <div class="sim-grid">
+            <div class="sim-product">
+              <div class="sim-product-img">Product Image</div>
+              <div class="sim-product-name">Adhesive Vinyl Sheet</div>
+              <div class="sim-product-price">$2.50</div>
+            </div>
+            <div class="sim-product">
+              <div class="sim-product-img">Product Image</div>
+              <div class="sim-product-name">DTF Transfer — Custom</div>
+              <div class="sim-product-price">$4.00</div>
+            </div>
+            <div class="sim-product">
+              <div class="sim-product-img">Product Image</div>
+              <div class="sim-product-name">Ready to Press Design</div>
+              <div class="sim-product-price">$3.50</div>
+            </div>
+            <div class="sim-product">
+              <div class="sim-product-img">Product Image</div>
+              <div class="sim-product-name">Heat Transfer Vinyl</div>
+              <div class="sim-product-price">$2.00</div>
+            </div>
+          </div>
+        </div>
+        <div class="sim-footer">© 2025 Alabama Vinyl · Hoover, Alabama · All Rights Reserved</div>
+      </div>
+    </div>
+    <p style="font-size:12px; color:var(--gray); margin-top:12px; font-style:italic;">Note: This is a reconstructed representation of the current site layout and issues — not a live screenshot. Used for documentation and comparison purposes.</p>
+  </div>
+
+  <!-- ISSUE ANNOTATIONS -->
+  <div class="section">
+    <div class="section-label">Identified Issues</div>
+    <div class="section-title">What's Wrong With the Current Site</div>
+    <div class="issues-grid">
+      <div class="issue-card critical">
+        <div class="issue-severity critical">Critical</div>
+        <div class="issue-title">H1 Reads "Prints Supply"</div>
+        <div class="issue-desc">The homepage H1 and several page titles still say "Prints Supply" — the old brand name. The rebrand to "Alabama Vinyl and Print Company" is not reflected in SEO-critical fields. Direct negative impact on local rankings.</div>
+      </div>
+      <div class="issue-card critical">
+        <div class="issue-severity critical">Critical</div>
+        <div class="issue-title">Broken Pages — Prior Contractor Damage</div>
+        <div class="issue-desc">A previous overseas contractor copy-pasted content from a reference site, including non-English text and stock videos. Multiple pages still have mismatched, placeholder, or foreign-language content.</div>
+      </div>
+      <div class="issue-card warning">
+        <div class="issue-severity warning">High</div>
+        <div class="issue-title">10-Item Navigation — No Hierarchy</div>
+        <div class="issue-desc">Main nav has 10+ links with no visual grouping or priority. Customers can't find the DTF ordering flow quickly. No clear primary CTA above the fold.</div>
+      </div>
+      <div class="issue-card warning">
+        <div class="issue-severity warning">High</div>
+        <div class="issue-title">No DTF Customer Journey</div>
+        <div class="issue-desc">Three distinct ordering flows exist (by size, gang sheet builder, pre-built upload) but there's no guidance on which to use. Customers land on product pages with no context, leading to confusion and abandoned carts.</div>
+      </div>
+      <div class="issue-card warning">
+        <div class="issue-severity warning">High</div>
+        <div class="issue-title">Generic Impulse Theme — No Brand Identity</div>
+        <div class="issue-desc">The site uses the Shopify Impulse theme with minimal customization. No brand story, no visual hierarchy, no emotional connection. Looks identical to hundreds of other Shopify stores.</div>
+      </div>
+      <div class="issue-card warning">
+        <div class="issue-severity warning">Medium</div>
+        <div class="issue-title">404 Page Shows Placeholder Product</div>
+        <div class="issue-desc">The 404 error page displays "EXAMPLE PRODUCT $29" — a default Shopify placeholder that was never replaced. Unprofessional and confusing for customers who land on broken links.</div>
+      </div>
+      <div class="issue-card info">
+        <div class="issue-severity info">Medium</div>
+        <div class="issue-title">No LocalBusiness Schema Markup</div>
+        <div class="issue-desc">No structured data for address, hours, or phone number. GBP listing exists but the site doesn't reinforce it with schema. Missing a direct path to #1 local ranking.</div>
+      </div>
+      <div class="issue-card info">
+        <div class="issue-severity info">Low</div>
+        <div class="issue-title">Inconsistent Product Photography</div>
+        <div class="issue-desc">Product images are flat, inconsistent in style and background. Not in scope to reshoot — flagged to Tiffany. High-quality mockups will be used in the rebuild where needed.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PAGE INVENTORY -->
+  <div class="section">
+    <div class="section-label">Page Inventory</div>
+    <div class="section-title">Current Pages — Status at Audit</div>
+    <table class="page-table">
+      <thead>
+        <tr>
+          <th>URL</th>
+          <th>Page</th>
+          <th>Status</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>/</td>
+          <td>Homepage</td>
+          <td><span class="status-tag rebuild">Rebuild</span></td>
+          <td style="color:var(--gray); font-size:12px;">H1 mismatch, generic hero, no brand story, overcrowded nav</td>
+        </tr>
+        <tr>
+          <td>/collections/all</td>
+          <td>Shop All</td>
+          <td><span class="status-tag weak">Weak</span></td>
+          <td style="color:var(--gray); font-size:12px;">Functional but unstyled. No filtering, no hierarchy.</td>
+        </tr>
+        <tr>
+          <td>/collections/dtf-transfers</td>
+          <td>DTF Transfers</td>
+          <td><span class="status-tag rebuild">Rebuild</span></td>
+          <td style="color:var(--gray); font-size:12px;">No customer journey. Three ordering flows exist but no guidance on which to use.</td>
+        </tr>
+        <tr>
+          <td>/collections/ready-to-press-transfers</td>
+          <td>Ready-to-Press</td>
+          <td><span class="status-tag weak">Weak</span></td>
+          <td style="color:var(--gray); font-size:12px;">Collection exists. No browsable grid, no filtering by category.</td>
+        </tr>
+        <tr>
+          <td>/collections/vinyl</td>
+          <td>Vinyl</td>
+          <td><span class="status-tag ok">Functional</span></td>
+          <td style="color:var(--gray); font-size:12px;">Products listed. Styling update needed to match new design system.</td>
+        </tr>
+        <tr>
+          <td>/pages/about</td>
+          <td>About</td>
+          <td><span class="status-tag broken">Broken</span></td>
+          <td style="color:var(--gray); font-size:12px;">Contains copy-pasted content from prior contractor. Needs full rewrite.</td>
+        </tr>
+        <tr>
+          <td>/pages/contact</td>
+          <td>Contact</td>
+          <td><span class="status-tag weak">Weak</span></td>
+          <td style="color:var(--gray); font-size:12px;">Basic contact form. No map embed, no hours, no phone click-to-call.</td>
+        </tr>
+        <tr>
+          <td>/404</td>
+          <td>404 Error</td>
+          <td><span class="status-tag broken">Broken</span></td>
+          <td style="color:var(--gray); font-size:12px;">Shows "EXAMPLE PRODUCT $29" — Shopify default placeholder, never replaced.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- BEFORE / AFTER -->
+  <div class="section">
+    <div class="section-label">Transformation</div>
+    <div class="section-title">Before vs. After the Rebuild</div>
+    <div class="ba-grid">
+      <div class="ba-col before">
+        <div class="ba-label before">Before — Current State</div>
+        <ul class="ba-list">
+          <li><span class="icon" style="color:var(--danger);">✗</span> Generic Impulse theme, zero brand differentiation</li>
+          <li><span class="icon" style="color:var(--danger);">✗</span> H1 reads "Prints Supply" — wrong brand name in SEO</li>
+          <li><span class="icon" style="color:var(--danger);">✗</span> 10-item nav with no hierarchy or clear CTA</li>
+          <li><span class="icon" style="color:var(--danger);">✗</span> Broken pages with foreign-language placeholder content</li>
+          <li><span class="icon" style="color:var(--danger);">✗</span> DTF ordering flow — confusing, no customer guidance</li>
+          <li><span class="icon" style="color:var(--danger);">✗</span> No LocalBusiness schema, no Open Graph, no GA4</li>
+          <li><span class="icon" style="color:var(--danger);">✗</span> 404 page shows placeholder product</li>
+          <li><span class="icon" style="color:var(--danger);">✗</span> Ranks 3rd–4th locally — invisible to most searchers</li>
+          <li><span class="icon" style="color:var(--danger);">✗</span> Digital health score: 64.3/100 — Grade D</li>
+        </ul>
+      </div>
+      <div class="ba-col after">
+        <div class="ba-label after">After — Post-Rebuild</div>
+        <ul class="ba-list">
+          <li><span class="icon" style="color:var(--green);">✓</span> Custom-designed front-end — bold, Southern, professional</li>
+          <li><span class="icon" style="color:var(--green);">✓</span> "Alabama Vinyl and Print Company" consistent everywhere</li>
+          <li><span class="icon" style="color:var(--green);">✓</span> Clean 5-item nav, scalable for future categories</li>
+          <li><span class="icon" style="color:var(--green);">✓</span> All pages rebuilt with accurate, branded content</li>
+          <li><span class="icon" style="color:var(--green);">✓</span> Three DTF flows with customer guidance — self-service ordering</li>
+          <li><span class="icon" style="color:var(--green);">✓</span> LocalBusiness schema, Open Graph, GA4 + GTM live</li>
+          <li><span class="icon" style="color:var(--green);">✓</span> Custom 404 page with navigation back to shop</li>
+          <li><span class="icon" style="color:var(--green);">✓</span> Target: #1–2 local ranking for vinyl/DTF searches</li>
+          <li><span class="icon" style="color:var(--green);">✓</span> Projected score: ~90+/100 post-launch</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">Speed of Now Digital · Alabama Vinyl · Current Site Reference</div>
+  <div class="footer-right" id="footer-date"></div>
+</footer>
+
+<script>
+  const d = new Date();
+  const s = d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  document.getElementById('doc-date').textContent = s;
+  document.getElementById('footer-date').textContent = 'Produced ' + s;
+</script>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alabama Vinyl — Site Analysis & Scoring</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:  #0d0d0d;
+    --bg2:    #141414;
+    --bg3:    #1a1a1a;
+    --border: #2a2a2a;
+    --gold:   #CC2200;
+    --white:  #F5F0E8;
+    --gray:   #888;
+    --gray2:  #555;
+    --green:  #6fcf97;
+    --yellow: #f2c94c;
+    --red:    #eb5757;
+    --serif:  'Cormorant Garamond', Georgia, serif;
+    --mono:   'DM Mono', monospace;
+    --sans:   'DM Sans', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding: 24px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .header-brand { font-family: var(--mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); }
+  .header-brand strong { color: var(--white); display: block; font-size: 12px; margin-bottom: 2px; }
+  .header-date { font-family: var(--mono); font-size: 10px; color: var(--gray2); letter-spacing: 1px; }
+
+  .hero { padding: 64px 48px 0; }
+  .eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .hero h1 { font-family: var(--serif); font-size: 54px; font-weight: 600; line-height: 1.0; margin-bottom: 16px; }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero-sub { color: var(--gray); font-size: 15px; max-width: 560px; font-weight: 300; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
+
+  .verdict {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .verdict-main {
+    flex: 0 0 280px;
+    padding: 48px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .verdict-score {
+    font-family: var(--serif);
+    font-size: 96px;
+    font-weight: 600;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .verdict-denom { font-family: var(--mono); font-size: 14px; color: var(--gray2); margin-top: 6px; letter-spacing: 2px; }
+  .verdict-label { font-family: var(--mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); margin-top: 12px; }
+  .verdict-prev {
+    flex: 0 0 200px;
+    padding: 48px 36px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .prev-score { font-family: var(--serif); font-size: 56px; color: var(--gray2); font-weight: 600; line-height: 1; }
+  .prev-label { font-family: var(--mono); font-size: 10px; color: var(--gray2); letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
+  .verdict-delta {
+    flex: 1;
+    padding: 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .delta-num { font-family: var(--serif); font-size: 56px; color: var(--green); font-weight: 600; line-height: 1; }
+  .delta-label { font-family: var(--mono); font-size: 10px; color: var(--gray2); letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
+  .verdict-rank {
+    flex: 0 0 200px;
+    padding: 48px 36px;
+    border-left: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: rgba(204,34,0,0.04);
+  }
+  .rank-num { font-family: var(--serif); font-size: 56px; color: var(--gold); font-weight: 600; line-height: 1; }
+  .rank-label { font-family: var(--mono); font-size: 10px; color: var(--gray2); letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
+
+  .content { max-width: 960px; margin: 0 auto; padding: 56px 48px; }
+  .section { margin-bottom: 56px; }
+  .section-label { font-family: var(--mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .section-title { font-family: var(--serif); font-size: 30px; font-weight: 600; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+
+  .score-table { width: 100%; border-collapse: collapse; }
+  .score-table th { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray2); text-align: left; padding: 10px 16px; border-bottom: 1px solid var(--border); }
+  .score-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 13px; color: #ccc; vertical-align: middle; }
+  .score-table tr:last-child td { border-bottom: none; }
+  .score-table td:first-child { font-size: 14px; color: var(--white); font-weight: 500; }
+  .score-val { font-family: var(--mono); font-size: 18px; font-weight: 500; color: var(--gold); text-align: center; }
+  .score-val.good { color: var(--green); }
+  .score-val.warn { color: var(--yellow); }
+  .score-val.bad { color: var(--red); }
+  .score-bar-wrap { width: 200px; }
+  .score-bar-bg { background: var(--bg3); height: 4px; border-radius: 2px; width: 100%; }
+  .score-bar-fill { height: 4px; border-radius: 2px; background: var(--gold); }
+  .score-bar-fill.good { background: var(--green); }
+  .score-bar-fill.warn { background: var(--yellow); }
+  .score-bar-fill.bad { background: var(--red); }
+  .note-cell { color: var(--gray); font-size: 12px; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .win-card { background: var(--bg2); border: 1px solid var(--border); padding: 22px; }
+  .win-card-label { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--green); margin-bottom: 12px; }
+  .gap-card { background: var(--bg2); border: 1px solid var(--border); padding: 22px; }
+  .gap-card-label { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--yellow); margin-bottom: 12px; }
+  .card-title { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 6px; }
+  .card-body { font-size: 12px; color: var(--gray); line-height: 1.6; }
+
+  .checklist { list-style: none; }
+  .checklist li { display: flex; gap: 14px; padding: 12px 0; border-bottom: 1px solid var(--border); align-items: flex-start; font-size: 13px; }
+  .checklist li:last-child { border-bottom: none; }
+  .check-icon { flex-shrink: 0; width: 18px; height: 18px; border-radius: 2px; display: flex; align-items: center; justify-content: center; font-size: 10px; margin-top: 2px; }
+  .check-icon.done { background: rgba(111,207,151,0.15); color: var(--green); }
+  .check-icon.partial { background: rgba(242,201,76,0.15); color: var(--yellow); }
+  .check-icon.missing { background: rgba(235,87,87,0.12); color: var(--red); }
+  .check-label { flex: 1; }
+  .check-label strong { color: var(--white); display: block; margin-bottom: 2px; }
+  .check-label span { color: var(--gray); font-size: 12px; }
+
+  .priority-box { background: rgba(204,34,0,0.06); border: 1px solid rgba(204,34,0,0.2); padding: 28px 32px; margin-top: 12px; }
+  .priority-label { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .priority-items { display: flex; flex-direction: column; gap: 14px; }
+  .priority-item { display: flex; gap: 16px; align-items: flex-start; }
+  .p-num { font-family: var(--mono); font-size: 12px; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+  .p-body strong { color: var(--white); font-size: 14px; display: block; margin-bottom: 2px; }
+  .p-body span { color: var(--gray); font-size: 12px; }
+
+  footer { border-top: 1px solid var(--border); padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-left { font-family: var(--mono); font-size: 10px; color: var(--gray2); letter-spacing: 2px; text-transform: uppercase; }
+  .footer-right { font-family: var(--mono); font-size: 10px; color: var(--gray2); }
+
+  @media (max-width: 768px) {
+    header, .hero, .content, footer { padding-left: 20px; padding-right: 20px; }
+    .verdict { flex-direction: column; }
+    .verdict-main, .verdict-prev, .verdict-delta, .verdict-rank { flex: unset; border: none; border-bottom: 1px solid var(--border); padding: 28px 20px; }
+    .hero h1 { font-size: 36px; }
+    .two-col { grid-template-columns: 1fr; }
+    .score-bar-wrap { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-brand">
+    <strong>Speed of Now Digital</strong>
+    Digital Health Audit — alabamavinyl.com
+  </div>
+  <div class="header-date" id="doc-date"></div>
+</header>
+
+<div class="hero">
+  <div class="eyebrow">Alabama Vinyl and Print Company · alabamavinyl.com · Hoover, AL</div>
+  <h1>Site <em>Analysis</em></h1>
+  <p class="hero-sub">Independent digital health audit of alabamavinyl.com across five weighted categories. Scored prior to the contracted front-end rebuild under Option B.</p>
+</div>
+
+<div class="verdict">
+  <div class="verdict-main">
+    <div class="verdict-score">64.3</div>
+    <div class="verdict-denom">out of 100</div>
+    <div class="verdict-label">Overall Score — Grade D</div>
+  </div>
+  <div class="verdict-prev">
+    <div class="prev-score">5.0</div>
+    <div class="prev-label">Website & Technical</div>
+  </div>
+  <div class="verdict-delta">
+    <div class="delta-num">+35.7</div>
+    <div class="delta-label">Projected Score Gain Post-Rebuild</div>
+  </div>
+  <div class="verdict-rank">
+    <div class="rank-num">#3–4</div>
+    <div class="rank-label">Local SEO Rank (Current)</div>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- CATEGORY BREAKDOWN -->
+  <div class="section">
+    <div class="section-label">Audit Results</div>
+    <div class="section-title">Category Breakdown</div>
+    <table class="score-table">
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>Score</th>
+          <th>Weight</th>
+          <th style="width:220px;">Visual</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Website &amp; Technical</td>
+          <td><span class="score-val bad">5.0/10</span></td>
+          <td class="note-cell">30%</td>
+          <td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill bad" style="width:50%"></div></div></div></td>
+          <td class="note-cell">Generic Impulse theme, broken pages from prior contractor, overcrowded nav, no custom branding</td>
+        </tr>
+        <tr>
+          <td>SEO &amp; Discoverability</td>
+          <td><span class="score-val good">7.7/10</span></td>
+          <td class="note-cell">25%</td>
+          <td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill good" style="width:77%"></div></div></div></td>
+          <td class="note-cell">Ranks 3rd–4th locally; page title mismatch ("Prints Supply" vs "Print Company"); schema incomplete</td>
+        </tr>
+        <tr>
+          <td>Local Presence</td>
+          <td><span class="score-val warn">5.5/10</span></td>
+          <td class="note-cell">20%</td>
+          <td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill warn" style="width:55%"></div></div></div></td>
+          <td class="note-cell">GBP listing exists; name mismatch between old/new brand; inconsistent NAP across directories</td>
+        </tr>
+        <tr>
+          <td>Content &amp; Social</td>
+          <td><span class="score-val warn">6.0/10</span></td>
+          <td class="note-cell">15%</td>
+          <td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill warn" style="width:60%"></div></div></div></td>
+          <td class="note-cell">Product catalog exists; no brand story; inconsistent imagery; social presence minimal</td>
+        </tr>
+        <tr>
+          <td>Infrastructure</td>
+          <td><span class="score-val good">10.0/10</span></td>
+          <td class="note-cell">10%</td>
+          <td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill good" style="width:100%"></div></div></div></td>
+          <td class="note-cell">Shopify — fully managed, SSL, CDN, uptime. No concerns. Backend is solid.</td>
+        </tr>
+        <tr style="background:rgba(204,34,0,0.04);">
+          <td><strong>Overall</strong></td>
+          <td><span class="score-val" style="color:var(--yellow);">64.3/100</span></td>
+          <td class="note-cell">—</td>
+          <td><div class="score-bar-wrap"><div class="score-bar-bg"><div class="score-bar-fill warn" style="width:64.3%"></div></div></div></td>
+          <td class="note-cell"><strong style="color:var(--white);">Grade D — Rebuild Warranted</strong></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- WINS & GAPS -->
+  <div class="section">
+    <div class="section-label">Strengths vs. Gaps</div>
+    <div class="section-title">What's Working / What's Not</div>
+    <div class="two-col">
+      <div class="win-card">
+        <div class="win-card-label">✓ Strength</div>
+        <div class="card-title">Shopify Backend — Bulletproof</div>
+        <div class="card-body">The platform itself is solid. Shopify handles hosting, SSL, CDN, and uptime. The rebuild is purely cosmetic — the backend stays untouched.</div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-card-label">⚠ Critical Gap</div>
+        <div class="card-title">Brand Name Mismatch in SEO</div>
+        <div class="card-body">Page title still reads "Prints Supply" in several places. The rebrand to "Alabama Vinyl and Print Company" is not reflected in title tags, H1s, or schema markup.</div>
+      </div>
+      <div class="win-card">
+        <div class="win-card-label">✓ Strength</div>
+        <div class="card-title">Local SEO Foundation Exists</div>
+        <div class="card-body">Already ranking 3rd–4th locally for vinyl-related searches. GBP listing is live. Strong foundation to push to #1 with on-page fixes and schema.</div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-card-label">⚠ Critical Gap</div>
+        <div class="card-title">Broken Pages from Prior Contractor</div>
+        <div class="card-body">Previous overseas contractor copy-pasted content including non-English text onto several pages. Multiple tabs still have mismatched or placeholder content.</div>
+      </div>
+      <div class="win-card">
+        <div class="win-card-label">✓ Strength</div>
+        <div class="card-title">Drip Apps Gang Sheet Builder</div>
+        <div class="card-body">The custom DTF upload app is already installed. It's misconfigured, but the infrastructure is there. Fix, don't rebuild.</div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-card-label">⚠ Critical Gap</div>
+        <div class="card-title">No Visual Brand Identity</div>
+        <div class="card-body">The site uses the generic Impulse theme with minimal customization. No brand story, no visual hierarchy, no emotional connection. Looks like a template, not a brand.</div>
+      </div>
+      <div class="win-card">
+        <div class="win-card-label">✓ Strength</div>
+        <div class="card-title">Distinctive Logo</div>
+        <div class="card-body">The hound dog badge logo is memorable and has brand equity. It's a keeper — the rebuild will feature it prominently rather than bury it.</div>
+      </div>
+      <div class="gap-card">
+        <div class="gap-card-label">⚠ Gap</div>
+        <div class="card-title">No DTF Customer Journey</div>
+        <div class="card-body">Three distinct ordering flows exist (by size, gang sheet builder, pre-built upload) but there's no guidance for customers on which to choose. Leads to confusion and abandoned carts.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TECHNICAL CHECKLIST -->
+  <div class="section">
+    <div class="section-label">Technical Audit</div>
+    <div class="section-title">Page-by-Page Findings</div>
+    <ul class="checklist">
+      <li>
+        <div class="check-icon missing">✗</div>
+        <div class="check-label">
+          <strong>Homepage H1 — Brand Name Mismatch</strong>
+          <span>H1 reads "Prints Supply" in several instances. Should be "Alabama Vinyl and Print Company." Affects local SEO ranking directly.</span>
+        </div>
+      </li>
+      <li>
+        <div class="check-icon missing">✗</div>
+        <div class="check-label">
+          <strong>Navigation — 10+ Items, No Hierarchy</strong>
+          <span>Main nav is overcrowded with 10+ links. No visual grouping, no mega-menu, no clear primary CTA. Customers can't find DTF ordering quickly.</span>
+        </div>
+      </li>
+      <li>
+        <div class="check-icon partial">~</div>
+        <div class="check-label">
+          <strong>DTF Product Pages — App Installed, Misconfigured</strong>
+          <span>Drip Apps gang sheet builder is live but the flow is unclear. Customers don't know which ordering method to use. Needs UX copy and flow redesign.</span>
+        </div>
+      </li>
+      <li>
+        <div class="check-icon missing">✗</div>
+        <div class="check-label">
+          <strong>Broken Content Pages — Prior Contractor Damage</strong>
+          <span>Several pages contain copy-pasted placeholder content, non-English text, and stock video from a reference site. Pages need full content audit and replacement.</span>
+        </div>
+      </li>
+      <li>
+        <div class="check-icon missing">✗</div>
+        <div class="check-label">
+          <strong>404 Page — Placeholder Product Showing</strong>
+          <span>404 error page shows "EXAMPLE PRODUCT $29" — a default Shopify placeholder. Needs custom 404 with navigation back to shop.</span>
+        </div>
+      </li>
+      <li>
+        <div class="check-icon partial">~</div>
+        <div class="check-label">
+          <strong>Local Schema Markup — Incomplete</strong>
+          <span>No LocalBusiness schema. No structured data for address, hours, or phone. GBP listing exists but site schema doesn't reinforce it.</span>
+        </div>
+      </li>
+      <li>
+        <div class="check-icon done">✓</div>
+        <div class="check-label">
+          <strong>SSL / HTTPS — Active</strong>
+          <span>Shopify-managed SSL certificate is active. No mixed content warnings observed.</span>
+        </div>
+      </li>
+      <li>
+        <div class="check-icon done">✓</div>
+        <div class="check-label">
+          <strong>Mobile Responsive — Functional</strong>
+          <span>Impulse theme is mobile-responsive by default. Layout is functional on mobile, though not optimized for the DTF ordering flow on small screens.</span>
+        </div>
+      </li>
+      <li>
+        <div class="check-icon partial">~</div>
+        <div class="check-label">
+          <strong>Page Speed — Acceptable, Not Optimized</strong>
+          <span>Shopify CDN keeps baseline speed acceptable. No lazy loading on product images. No custom speed optimization applied.</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- PRIORITY FIXES -->
+  <div class="section">
+    <div class="section-label">Rebuild Priorities</div>
+    <div class="section-title">What Gets Fixed First</div>
+    <div class="priority-box">
+      <div class="priority-label">Top Priority Items — Phase 1 of Rebuild</div>
+      <div class="priority-items">
+        <div class="priority-item">
+          <div class="p-num">01</div>
+          <div class="p-body">
+            <strong>Fix brand name across all title tags, H1s, and meta descriptions</strong>
+            <span>Immediate SEO impact. "Alabama Vinyl and Print Company" must be consistent everywhere.</span>
+          </div>
+        </div>
+        <div class="priority-item">
+          <div class="p-num">02</div>
+          <div class="p-body">
+            <strong>Rebuild navigation — 5 items max, clear hierarchy</strong>
+            <span>Shop, DTF Transfers, Ready-to-Press, About, Contact. Scalable slots for stickers/banners/promo items.</span>
+          </div>
+        </div>
+        <div class="priority-item">
+          <div class="p-num">03</div>
+          <div class="p-body">
+            <strong>Rebuild homepage hero — bold, branded, dual CTA</strong>
+            <span>Black background, red accent, white text. "Order DTF Transfers" + "Browse Ready-to-Press." Above the fold, no scroll required.</span>
+          </div>
+        </div>
+        <div class="priority-item">
+          <div class="p-num">04</div>
+          <div class="p-body">
+            <strong>Fix DTF customer journey — three flows, clearly labeled</strong>
+            <span>Transfers by Size / Build a Gang Sheet / Upload Your File. Each with a 1-sentence descriptor so customers self-select.</span>
+          </div>
+        </div>
+        <div class="priority-item">
+          <div class="p-num">05</div>
+          <div class="p-body">
+            <strong>Add LocalBusiness schema + align with Google Business Profile</strong>
+            <span>Address, hours, phone, business name — all matching GBP exactly. Direct path to #1 local ranking.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">Speed of Now Digital · Alabama Vinyl · Site Analysis</div>
+  <div class="footer-right" id="footer-date"></div>
+</footer>
+
+<script>
+  const d = new Date();
+  const s = d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  document.getElementById('doc-date').textContent = s;
+  document.getElementById('footer-date').textContent = 'Produced ' + s;
+</script>
+</body>
+</html>

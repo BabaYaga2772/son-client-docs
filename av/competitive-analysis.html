@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alabama Vinyl — Competitive Analysis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:  #0d0d0d;
+    --bg2:    #141414;
+    --bg3:    #1a1a1a;
+    --border: #2a2a2a;
+    --red:    #CC2200;
+    --white:  #F5F0E8;
+    --gray:   #888;
+    --gray2:  #555;
+    --green:  #6fcf97;
+    --yellow: #f2c94c;
+    --danger: #eb5757;
+    --serif:  'Cormorant Garamond', Georgia, serif;
+    --mono:   'DM Mono', monospace;
+    --sans:   'DM Sans', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--black); color: var(--white); font-family: var(--sans); font-size: 14px; line-height: 1.7; }
+
+  header { border-bottom: 1px solid var(--border); padding: 24px 48px; display: flex; align-items: center; justify-content: space-between; }
+  .header-brand { font-family: var(--mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); }
+  .header-brand strong { color: var(--white); display: block; font-size: 12px; margin-bottom: 2px; }
+  .header-date { font-family: var(--mono); font-size: 10px; color: var(--gray2); letter-spacing: 1px; }
+
+  .hero { padding: 64px 48px 0; }
+  .eyebrow { font-family: var(--mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 16px; }
+  .hero h1 { font-family: var(--serif); font-size: 54px; font-weight: 600; line-height: 1.0; margin-bottom: 16px; }
+  .hero h1 em { font-style: italic; color: var(--red); }
+  .hero-sub { color: var(--gray); font-size: 15px; max-width: 600px; font-weight: 300; padding-bottom: 48px; border-bottom: 1px solid var(--border); }
+
+  .content { max-width: 960px; margin: 0 auto; padding: 56px 48px; }
+  .section { margin-bottom: 64px; }
+  .section-label { font-family: var(--mono); font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+  .section-title { font-family: var(--serif); font-size: 30px; font-weight: 600; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+
+  /* Competitor cards */
+  .comp-card { background: var(--bg2); border: 1px solid var(--border); margin-bottom: 24px; }
+  .comp-header { display: flex; align-items: center; justify-content: space-between; padding: 24px 28px; border-bottom: 1px solid var(--border); }
+  .comp-name { font-family: var(--serif); font-size: 22px; font-weight: 600; }
+  .comp-url { font-family: var(--mono); font-size: 11px; color: var(--gray); margin-top: 4px; }
+  .comp-verdict { font-family: var(--mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 6px 14px; border: 1px solid; }
+  .verdict-avoid { color: var(--danger); border-color: rgba(235,87,87,0.3); background: rgba(235,87,87,0.06); }
+  .comp-body { padding: 24px 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .comp-col-label { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 12px; }
+  .comp-col-label.problem { color: var(--danger); }
+  .comp-col-label.lesson { color: var(--green); }
+  .comp-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .comp-list li { font-size: 13px; color: var(--gray); display: flex; gap: 10px; align-items: flex-start; }
+  .comp-list li::before { content: '—'; color: var(--gray2); flex-shrink: 0; margin-top: 1px; }
+  .comp-list li strong { color: var(--white); display: block; font-size: 13px; }
+  .comp-footer { padding: 16px 28px; border-top: 1px solid var(--border); background: var(--bg3); }
+  .comp-footer-label { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray2); margin-bottom: 6px; }
+  .comp-footer-text { font-size: 13px; color: var(--gray); font-style: italic; }
+
+  /* Comparison matrix */
+  .matrix { width: 100%; border-collapse: collapse; }
+  .matrix th { font-family: var(--mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray2); text-align: left; padding: 10px 16px; border-bottom: 1px solid var(--border); }
+  .matrix td { padding: 13px 16px; border-bottom: 1px solid var(--border); font-size: 13px; vertical-align: middle; }
+  .matrix tr:last-child td { border-bottom: none; }
+  .matrix td:first-child { font-weight: 500; color: var(--white); }
+  .matrix td.av { background: rgba(204,34,0,0.05); }
+  .tag { display: inline-block; font-family: var(--mono); font-size: 9px; letter-spacing: 1px; text-transform: uppercase; padding: 3px 8px; border-radius: 2px; }
+  .tag.good { background: rgba(111,207,151,0.12); color: var(--green); }
+  .tag.bad { background: rgba(235,87,87,0.1); color: var(--danger); }
+  .tag.mid { background: rgba(242,201,76,0.1); color: var(--yellow); }
+
+  /* Positioning statement */
+  .position-box { background: rgba(204,34,0,0.06); border: 1px solid rgba(204,34,0,0.2); padding: 36px 40px; }
+  .position-label { font-family: var(--mono); font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--red); margin-bottom: 20px; }
+  .position-statement { font-family: var(--serif); font-size: 28px; font-weight: 600; line-height: 1.3; color: var(--white); margin-bottom: 20px; }
+  .position-statement em { color: var(--red); font-style: italic; }
+  .position-sub { color: var(--gray); font-size: 13px; line-height: 1.7; }
+
+  footer { border-top: 1px solid var(--border); padding: 24px 48px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-left { font-family: var(--mono); font-size: 10px; color: var(--gray2); letter-spacing: 2px; text-transform: uppercase; }
+  .footer-right { font-family: var(--mono); font-size: 10px; color: var(--gray2); }
+
+  @media (max-width: 768px) {
+    header, .hero, .content, footer { padding-left: 20px; padding-right: 20px; }
+    .hero h1 { font-size: 36px; }
+    .comp-body { grid-template-columns: 1fr; }
+    .comp-header { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-brand">
+    <strong>Speed of Now Digital</strong>
+    Competitive Analysis — Alabama Vinyl and Print Company
+  </div>
+  <div class="header-date" id="doc-date"></div>
+</header>
+
+<div class="hero">
+  <div class="eyebrow">Alabama Vinyl and Print Company · Hoover, AL · Local Market</div>
+  <h1>Competitive <em>Analysis</em></h1>
+  <p class="hero-sub">Three local competitors identified by Tiffany Crocker as sites she explicitly does not want to look like. Each was audited for design, UX, brand positioning, and market differentiation.</p>
+</div>
+
+<div class="content">
+
+  <!-- COMPETITOR 1 -->
+  <div class="section">
+    <div class="section-label">Competitor 01</div>
+    <div class="section-title">The Three Sites</div>
+
+    <div class="comp-card">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">MerchWrks</div>
+          <div class="comp-url">merchwrks.com — Hoover, AL</div>
+        </div>
+        <div class="comp-verdict verdict-avoid">Avoid This Look</div>
+      </div>
+      <div class="comp-body">
+        <div>
+          <div class="comp-col-label problem">What's Wrong</div>
+          <ul class="comp-list">
+            <li><strong>Navigation overload</strong> Two rows of nav links — Tax Exemption Info, Instructional Videos, Hoover Merch all in the main nav. Feels like a directory, not a brand.</li>
+            <li><strong>Aggressive pop-up</strong> Tumbler sale pop-up fires immediately on landing. Kills the first impression.</li>
+            <li><strong>No brand story</strong> Four product tiles side by side with no breathing room, no hierarchy, no emotional hook.</li>
+            <li><strong>Wholesale catalog energy</strong> Looks like a B2B distributor, not a local shop. No warmth, no identity.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="comp-col-label lesson">What We Take From It</div>
+          <ul class="comp-list">
+            <li><strong>Color direction is close</strong> Black/dark background with white text and orange accents — not far off from what we want. The palette isn't the problem, the execution is.</li>
+            <li><strong>Positioning statement exists</strong> "SHOP WHERE THE PROFESSIONALS SHOP" is actually a decent line. We need something equally direct for Alabama Vinyl.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="comp-footer">
+        <div class="comp-footer-label">Tiffany's Take</div>
+        <div class="comp-footer-text">"Too cluttered, too transactional. Doesn't feel like a brand."</div>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Bama Print House</div>
+          <div class="comp-url">bamaprinthouse.com — Alabama</div>
+        </div>
+        <div class="comp-verdict verdict-avoid">Avoid This Look</div>
+      </div>
+      <div class="comp-body">
+        <div>
+          <div class="comp-col-label problem">What's Wrong</div>
+          <ul class="comp-list">
+            <li><strong>The "castelly colors"</strong> Olive/sage green background — exactly what Tiffany described when she said she doesn't want "frilly" or "castelly" colors. Soft, muted, earthy. Craft fair, not print shop.</li>
+            <li><strong>Hobbyist logo</strong> Colorful paint-drip logo. Looks like a Cricut mom brand, not a commercial operation.</li>
+            <li><strong>Squarespace default, untouched</strong> The scrolling marquee literally reads "WHAT WE OFFER * WHAT WE OFFER *" — the placeholder text was never changed.</li>
+            <li><strong>No product imagery</strong> The hero is a slideshow of shop photos. No products visible above the fold. No clear CTA.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="comp-col-label lesson">What We Take From It</div>
+          <ul class="comp-list">
+            <li><strong>Simple nav can work</strong> Their navigation (Home, FAQ, Apparel Catalogs, Contact) is actually clean. The problem isn't the nav — it's that there's nothing behind it. Our nav will be clean AND have substance.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="comp-footer">
+        <div class="comp-footer-label">Tiffany's Take</div>
+        <div class="comp-footer-text">"That's the frilly, girly, hobbyist look I'm trying to get away from."</div>
+      </div>
+    </div>
+
+    <div class="comp-card">
+      <div class="comp-header">
+        <div>
+          <div class="comp-name">Hectic Momma Printing</div>
+          <div class="comp-url">hecticmommaprinting.com</div>
+        </div>
+        <div class="comp-verdict verdict-avoid">Avoid This Look</div>
+      </div>
+      <div class="comp-body">
+        <div>
+          <div class="comp-col-label problem">What's Wrong</div>
+          <ul class="comp-list">
+            <li><strong>Hot pink everything</strong> Navigation bar is bright pink. Logo is a pink flower in a circle. The name itself ("Hectic Momma") positions it as a mom-run hobby business.</li>
+            <li><strong>Hyper-niche demographic</strong> All designs are florals, smiley faces, BookTok, Coquette. Targeting female hobbyists exclusively — a fraction of the DTF market.</li>
+            <li><strong>Aesthetic undermines credibility</strong> Their product catalog is actually well-organized (gang sheets, singles, UV DTF, bundles). But no commercial buyer would take them seriously at first glance.</li>
+          </ul>
+        </div>
+        <div>
+          <div class="comp-col-label lesson">What We Take From It</div>
+          <ul class="comp-list">
+            <li><strong>Product organization is solid</strong> Gang sheets, singles, UV DTF, bundles — clearly labeled. We'll use the same organizational logic for the DTF hub, just without the pink.</li>
+            <li><strong>Niche positioning works — when it's intentional</strong> They own the "mom crafter" niche completely. Alabama Vinyl should own the "serious local print shop" niche just as completely.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="comp-footer">
+        <div class="comp-footer-label">Tiffany's Take</div>
+        <div class="comp-footer-text">"Too girly. That's not who we are."</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPARISON MATRIX -->
+  <div class="section">
+    <div class="section-label">Side-by-Side</div>
+    <div class="section-title">Comparison Matrix</div>
+    <table class="matrix">
+      <thead>
+        <tr>
+          <th>Factor</th>
+          <th>MerchWrks</th>
+          <th>Bama Print House</th>
+          <th>Hectic Momma</th>
+          <th style="background:rgba(204,34,0,0.05);">Alabama Vinyl (Target)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Color Palette</td>
+          <td><span class="tag mid">Dark/Orange</span></td>
+          <td><span class="tag bad">Sage Green</span></td>
+          <td><span class="tag bad">Hot Pink</span></td>
+          <td class="av"><span class="tag good">Black/Red/White</span></td>
+        </tr>
+        <tr>
+          <td>Brand Identity</td>
+          <td><span class="tag bad">Minimal</span></td>
+          <td><span class="tag bad">Hobbyist</span></td>
+          <td><span class="tag mid">Niche/Girly</span></td>
+          <td class="av"><span class="tag good">Bold + Southern</span></td>
+        </tr>
+        <tr>
+          <td>Navigation</td>
+          <td><span class="tag bad">Overcrowded</span></td>
+          <td><span class="tag mid">Minimal</span></td>
+          <td><span class="tag mid">Functional</span></td>
+          <td class="av"><span class="tag good">Clean + Scalable</span></td>
+        </tr>
+        <tr>
+          <td>DTF Ordering Flow</td>
+          <td><span class="tag mid">Exists</span></td>
+          <td><span class="tag bad">None</span></td>
+          <td><span class="tag good">Well-Organized</span></td>
+          <td class="av"><span class="tag good">3 Flows, Guided</span></td>
+        </tr>
+        <tr>
+          <td>Local SEO</td>
+          <td><span class="tag mid">Moderate</span></td>
+          <td><span class="tag bad">Weak</span></td>
+          <td><span class="tag bad">Weak</span></td>
+          <td class="av"><span class="tag good">Optimized</span></td>
+        </tr>
+        <tr>
+          <td>Platform</td>
+          <td><span class="tag mid">Shopify</span></td>
+          <td><span class="tag bad">Squarespace</span></td>
+          <td><span class="tag mid">Shopify</span></td>
+          <td class="av"><span class="tag good">Shopify (Rebuilt)</span></td>
+        </tr>
+        <tr>
+          <td>Commercial Credibility</td>
+          <td><span class="tag mid">Moderate</span></td>
+          <td><span class="tag bad">Low</span></td>
+          <td><span class="tag bad">Low</span></td>
+          <td class="av"><span class="tag good">High</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- POSITIONING -->
+  <div class="section">
+    <div class="section-label">Market Position</div>
+    <div class="section-title">Where Alabama Vinyl Wins</div>
+    <div class="position-box">
+      <div class="position-label">Positioning Statement — Alabama Vinyl and Print Company</div>
+      <div class="position-statement">The <em>professional</em> print shop in Alabama. Not a hobby. Not a template. A real operation that does this all day.</div>
+      <div class="position-sub">Every competitor in this market is either a hobbyist brand or an under-designed catalog. Alabama Vinyl has the inventory, the equipment, the rebrand, and now the website to own the "serious local print shop" position. The rebuild doesn't just make the site look better — it makes the brand credible to commercial buyers, boutique owners, and event organizers who currently can't tell the difference between Alabama Vinyl and a Cricut mom with a Squarespace account.</div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-left">Speed of Now Digital · Alabama Vinyl · Competitive Analysis</div>
+  <div class="footer-right" id="footer-date"></div>
+</footer>
+
+<script>
+  const d = new Date();
+  const s = d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });
+  document.getElementById('doc-date').textContent = s;
+  document.getElementById('footer-date').textContent = 'Produced ' + s;
+</script>
+</body>
+</html>
