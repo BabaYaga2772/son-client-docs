@@ -64,6 +64,7 @@
       width: auto;
       display: block;
       object-fit: contain;
+      mix-blend-mode: screen;
     }
     /* Fallback logo text if image fails */
     .logo-fallback {
@@ -495,6 +496,11 @@
       line-height: 1;
       font-style: italic;
       text-transform: uppercase;
+      text-shadow:
+        -1px -1px 0 rgba(255,255,255,0.2),
+        3px 3px 0 rgba(100,0,0,0.9),
+        5px 5px 12px rgba(0,0,0,0.8),
+        0 0 20px rgba(204,0,0,0.15);
     }
     .stat-label {
       font-family: 'Barlow Condensed', sans-serif;
