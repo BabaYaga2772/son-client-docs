@@ -205,7 +205,17 @@
       color: var(--white);
       margin-bottom: 22px;
       font-style: italic;
-      text-shadow: 3px 3px 0 rgba(0,0,0,0.7);
+      text-shadow:
+        /* white highlight top-left (emboss) */
+        -1px -1px 0 rgba(255,255,255,0.35),
+        /* inner white glow */
+        0 0 8px rgba(255,255,255,0.15),
+        /* hard black drop shadow */
+        4px 4px 0 rgba(0,0,0,0.95),
+        /* soft black blur behind */
+        6px 6px 12px rgba(0,0,0,0.8),
+        /* deep shadow for depth */
+        8px 8px 20px rgba(0,0,0,0.6);
     }
     .hero-sub {
       font-size: 18px;
@@ -311,6 +321,10 @@
       position: relative;
       display: inline-block;
       margin-bottom: 10px;
+      text-shadow:
+        -1px -1px 0 rgba(255,255,255,0.25),
+        3px 3px 0 rgba(0,0,0,0.9),
+        5px 5px 10px rgba(0,0,0,0.7);
     }
     .section-title::after {
       content: '';
