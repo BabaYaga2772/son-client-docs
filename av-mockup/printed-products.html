@@ -44,13 +44,15 @@ a { color: inherit; text-decoration: none; }
 .ann-bar .sep { margin: 0 12px; opacity: 0.6; }
 @media (max-width: 600px) { .ann-bar .sep { display: none; } .ann-bar { font-size: 11px; } }
 
+
 /* ── HEADER / NAV ── */
+:root { --nav-h: 80px; }
 header {
   background: #0A0A0A;
-  border-bottom: 2px solid var(--red);
+  border-bottom: 2px solid #CC0000;
   position: sticky;
   top: 0;
-  z-index: 200;
+  z-index: 300;
   height: var(--nav-h);
 }
 .nav-inner {
@@ -77,16 +79,14 @@ header {
   flex: 1;
   justify-content: flex-end;
 }
-.nav-item {
-  position: relative;
-}
+.nav-item { position: relative; }
 .nav-link {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: var(--white);
+  color: #FFFFFF;
   padding: 8px 14px;
   display: flex;
   align-items: center;
@@ -96,7 +96,7 @@ header {
   white-space: nowrap;
   cursor: pointer;
 }
-.nav-link:hover, .nav-link.active { color: var(--red); }
+.nav-link:hover, .nav-link.active { color: #CC0000; }
 .nav-chevron { font-size: 10px; opacity: 0.6; transition: transform 0.2s; }
 .nav-item:hover .nav-chevron { transform: rotate(180deg); }
 /* Dropdown */
@@ -107,7 +107,7 @@ header {
   min-width: 220px;
   background: #111;
   border: 1px solid #2a2a2a;
-  border-top: 2px solid var(--red);
+  border-top: 2px solid #CC0000;
   border-radius: 0 0 4px 4px;
   padding: 8px 0;
   opacity: 0;
@@ -115,6 +115,7 @@ header {
   transform: translateY(-6px);
   transition: opacity 0.18s, transform 0.18s, visibility 0.18s;
   box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+  z-index: 400;
 }
 .nav-item:hover .nav-dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
 .nav-dropdown a {
@@ -128,12 +129,12 @@ header {
   color: #AAAAAA;
   transition: color 0.15s, background 0.15s;
 }
-.nav-dropdown a:hover { color: var(--white); background: rgba(204,0,0,0.1); }
+.nav-dropdown a:hover { color: #FFFFFF; background: rgba(204,0,0,0.1); }
 .nav-dropdown .dd-section {
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 3px;
-  color: var(--red);
+  color: #CC0000;
   padding: 12px 20px 4px;
   border-top: 1px solid #222;
   margin-top: 4px;
@@ -142,11 +143,11 @@ header {
 .nav-cart {
   font-size: 20px;
   cursor: pointer;
-  color: var(--white);
+  color: #FFFFFF;
   padding: 8px;
   transition: color 0.2s;
 }
-.nav-cart:hover { color: var(--red); }
+.nav-cart:hover { color: #CC0000; }
 
 /* Hamburger */
 .nav-hamburger {
@@ -162,7 +163,7 @@ header {
   display: block;
   width: 24px;
   height: 2px;
-  background: var(--white);
+  background: #FFFFFF;
   transition: all 0.25s;
   border-radius: 2px;
 }
@@ -170,39 +171,38 @@ header {
 .nav-hamburger.open span:nth-child(2) { opacity: 0; }
 .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Mobile nav drawer */
+/* Mobile nav drawer — starts BELOW the sticky header */
 .nav-mobile {
   display: none;
   position: fixed;
-  top: 0;
+  top: var(--nav-h);
   left: 0;
   right: 0;
   bottom: 0;
   background: #0A0A0A;
-  z-index: 190;
+  z-index: 290;
   overflow-y: auto;
-  padding: 100px 0 40px;
+  padding: 8px 0 40px;
   transform: translateX(100%);
   transition: transform 0.3s ease;
+  -webkit-overflow-scrolling: touch;
 }
 .nav-mobile.open { transform: translateX(0); }
-.mob-section {
-  border-bottom: 1px solid #1e1e1e;
-}
+.mob-section { border-bottom: 1px solid #1e1e1e; }
 .mob-section-header {
   font-family: 'Barlow Condensed', sans-serif;
   font-size: 18px;
   font-weight: 800;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--white);
+  color: #FFFFFF;
   padding: 18px 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
 }
-.mob-section-header.has-children::after { content: '▼'; font-size: 12px; color: var(--red); transition: transform 0.2s; }
+.mob-section-header.has-children::after { content: '▼'; font-size: 12px; color: #CC0000; transition: transform 0.2s; }
 .mob-section-header.has-children.open::after { transform: rotate(180deg); }
 .mob-sub-links { display: none; background: #111; }
 .mob-sub-links.open { display: block; }
@@ -222,12 +222,12 @@ header {
   font-size: 11px;
   font-weight: 800;
   letter-spacing: 3px;
-  color: var(--red);
+  color: #CC0000;
   padding: 12px 40px 4px;
 }
 
 @media (max-width: 900px) {
-  .nav-desktop { display: none; }
+  .nav-desktop { display: none !important; }
   .nav-hamburger { display: flex; }
   .nav-mobile { display: block; }
   .logo-link img { height: 50px; }
@@ -456,6 +456,57 @@ footer {
       <a href="faq.html">FAQ</a></div></div>
       <span class="nav-cart">🛒</span>
     </nav>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+<nav class="nav-mobile" id="mobileNav">
+  <div class="mob-section">
+    <div class="mob-section-header has-children">DTF Transfers</div>
+    <div class="mob-sub-links">
+      <div class="mob-sub-label">Standard DTF</div>
+      <a href="dtf.html#custom">Custom DTF Transfers</a>
+      <a href="dtf.html#gang-sheet">Upload Gang Sheet</a>
+      <a href="dtf.html#build">Build Gang Sheet</a>
+      <a href="dtf.html#prebuilt">Pre-Built Gang Sheets</a>
+      <a href="dtf.html#sample">Free Sample</a>
+      <div class="mob-sub-label">UV DTF Transfers</div>
+      <a href="dtf.html#uv-custom">Custom UV DTF</a>
+      <a href="dtf.html#uv-gang">Upload UV Gang Sheet</a>
+      <a href="dtf.html#uv-build">Build UV Gang Sheet</a>
+      <a href="dtf.html#uv-sample">Free UV Sample</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <div class="mob-section-header has-children">Ready-to-Press</div>
+    <div class="mob-sub-links">
+      <a href="rtp.html">Explore All Designs</a>
+      <a href="rtp.html#custom">Custom Design</a>
+      <a href="rtp.html#quotes">Quotes</a>
+      <a href="rtp.html#celebrities">Celebrities</a>
+    </div>
+  </div>
+  <div class="mob-section"><div class="mob-section-header"><a href="graphic-tees.html" style="color:inherit;">Graphic Tees</a></div></div>
+  <div class="mob-section"><div class="mob-section-header"><a href="printed-products.html" style="color:inherit;">Printed Products</a></div></div>
+  <div class="mob-section">
+    <div class="mob-section-header has-children">More</div>
+    <div class="mob-sub-links">
+      <a href="vinyl.html">Vinyl by the Sheet</a>
+      <a href="classes.html">Classes</a>
+      <a href="memberships.html">Memberships</a>
+      <a href="gift-cards.html">Gift Cards</a>
+    </div>
+  </div>
+  <div class="mob-section">
+    <div class="mob-section-header has-children">About / Contact</div>
+    <div class="mob-sub-links">
+      <a href="about.html">About Us</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="faq.html">FAQ</a>
+    </div>
+  </div>
+</nav>
     <button class="nav-hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
